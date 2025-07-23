@@ -59,7 +59,6 @@
     "Energy Diagram",
     "Energy",
     "Heat Stoichiometry",
-    "Stoichiometry",
     "Enthalpy of Formation",
     "Enthalpy of Reaction",
     "Hess's Law",
@@ -94,16 +93,21 @@
     "Mole-Mass",
     "Mole-Particle",
     "Mole-Mole",
-
     "Limiting Reactant",
     "Excess Reactant",
     "Theoretical, Actual, and Percent Yield",
 
+    "Gas Stoichiometry",
+    "Gas Properties",
+    "Ideal Gas Law",
+    "Partial Pressure",
+    "Boyle's Law",
+    "Charles's Law",
+    "Gay-Lussac's Law",
+
     "Unit Conversion",
     "Scientific Notation"
   ],
-
-  "groups": [],
 
   "edges": [
     { "concept": "Elements", "depends-on": ["Atomic Structure"] },
@@ -231,7 +235,7 @@
     { "concept": "Energy Diagram", "depends-on": ["Energy"] },
     {
       "concept": "Heat Stoichiometry",
-      "depends-on": ["Stoichiometry", "Enthalpy"]
+      "depends-on": ["Mass-Particle", "Enthalpy"]
     },
     { "concept": "Enthalpy of Formation", "depends-on": ["Enthalpy"] },
     {
@@ -296,6 +300,16 @@
     {
       "concept": "Excess Reactant",
       "depends-on": ["Theoretical, Actual, and Percent Yield"]
-    }
+    },
+
+    {
+      "concept": "Gas Stoichiometry",
+      "depends-on": ["Gas Properties", "Mass-Particle"]
+    },
+    { "concept": "Ideal Gas Law", "depends-on": ["Gas Properties"] },
+    { "concept": "Partial Pressure", "depends-on": ["Gas Properties"] },
+    { "concept": "Boyle's Law", "depends-on": ["Ideal Gas Law"] },
+    { "concept": "Charles's Law", "depends-on": ["Ideal Gas Law"] },
+    { "concept": "Gay-Lussac's Law", "depends-on": ["Ideal Gas Law"] }
   ]
 }

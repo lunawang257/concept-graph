@@ -2,15 +2,4 @@
     width: 75%;
     height: 75vh;
     border: 1px solid #ccc;
-} 
-
-.node {
-        background-color: #6FB1FC;
-        border-color: #4A90E2;
-        border-width: 2;
-        color: #333;
-        font-size: 14px;
-        font-weight: bold;
-        width: 80;
-        height: 40;
 }
