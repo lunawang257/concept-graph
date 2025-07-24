@@ -34,10 +34,10 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
     
     if ('groups' in old_dict):
         for group in old_dict['groups']:
-            all_nodes[group['name']] = ''
+            all_nodes[group['name'].upper()] = ''
 
         for group in old_dict['groups']:
-            parent: str = group['name']
+            parent: str = group['name'].upper()
             children = group['children']
             for c in children:
                 all_nodes[c] = parent
@@ -62,7 +62,7 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
 
 @app.get('/nodes-json/{use_pos}')
 def parse_nodes_json(use_pos: bool) -> dict:
-    filename = 'example_format.json'
+    filename = 'test.json'
     
     try:
         with open(filename, 'r') as file:
