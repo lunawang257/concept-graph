@@ -58,18 +58,10 @@ fetch(API_BASE + "/nodes-json/true")
 function loadGraph(elements) {
   if (cy) cy.destroy();
 
-  // Check if any nodes have saved positions
-  const hasSavedPositions = elements.nodes.some((node) => node.position);
-
   cy = cytoscape({
     container: document.getElementById("cy"),
     elements: elements,
-    layout: hasSavedPositions
-      ? { name: "preset" }
-      : {
-          name: "cose",
-          animate: false,
-        },
+    layout: { name: "preset" },
     style: `
       node {
         label: data(id);

@@ -1,6 +1,7 @@
 import json
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 app = FastAPI()
 app.add_middleware(
@@ -34,10 +35,10 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
     
     if ('groups' in old_dict):
         for group in old_dict['groups']:
-            all_nodes[group['name']] = ''
+            all_nodes[group['name'].upper()] = ''
 
         for group in old_dict['groups']:
-            parent: str = group['name']
+            parent: str = group['name'].upper()
             children = group['children']
             for c in children:
                 all_nodes[c] = parent
@@ -51,8 +52,8 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
         new_dict['nodes'].append(node)
     
     for e in old_dict['edges']:
-        concept = e['concept']
-        for source in e['depends-on']:
+        source = e['concept']
+        for concept in e['depends-on']:
             new_dict['edges'].append({'data': {'source': source, 'target': concept}})
     
     if use_pos:
@@ -62,7 +63,7 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
 
 @app.get('/nodes-json/{use_pos}')
 def parse_nodes_json(use_pos: bool) -> dict:
-    filename = 'example_format.json'
+    filename = 'test.json'
     
     try:
         with open(filename, 'r') as file:
@@ -87,3 +88,4 @@ async def save_positions(request: Request):
         return {"message": "Positions saved successfully", "positions": positions}
     except Exception as e:
         return {"error": f"Failed to save positions: {str(e)}"}
+ 
