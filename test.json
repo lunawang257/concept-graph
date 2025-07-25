@@ -288,7 +288,7 @@
         {"concept": "Formal Charge", "depends-on": ["Molecular LDS"]},
         {"concept": "Resonance", "depends-on": ["Formal Charge"]},
 
-        {"concept": "Ions", "depends-on": ["Atomic Structure", "Electronegativity"]},
+        {"concept": "Ions", "depends-on": ["Atomic Structure"]},
         {"concept": "Polyatomic Ions", "depends-on": ["Ions"]},
 
         {"concept": "Covalent Bonds", "depends-on": ["Electronegativity", "Molecules & Compounds"]},

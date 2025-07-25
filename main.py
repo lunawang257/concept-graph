@@ -42,7 +42,7 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
             children = group['children']
             for c in children:
                 all_nodes[c] = parent
-    
+
     for node_name, parent in all_nodes.items():
         node: dict = {'data': {'id': node_name}}
         if (node_name.upper() == node_name):

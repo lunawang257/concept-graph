@@ -5,55 +5,6 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
-// let cy = cytoscape({
-//   container: document.getElementById("cy"),
-//   elements: {
-//     nodes: [
-//       { data: { id: "child", parent: "first_par" } },
-//       { data: { id: "first_par", parent: "sec_par" } },
-//       { data: { id: "CHILD", parent: "sec_par" } },
-//       { data: { id: "sec_par" } },
-//     ],
-//     edges: [{ data: { source: "child", target: "CHILD" } }],
-//   },
-//   layout: {
-//     name: "cose",
-//     animate: "end",
-//   },
-//   style: `
-//     node {
-//       label: data(id);
-//       shape: rectangle;
-//       background-color: #6FB1FC;
-//       border-color: #4A90E2;
-//       border-width: 2;
-//       text-valign: center;
-//       text-halign: center;
-//       color: #333;
-//       font-size: 14px;
-//       font-weight: bold;
-//       width: 80;
-//       height: 40;
-//     }
-
-//     .par {
-//       background-color: #808080;
-//       border-color: #666666;
-//     }
-
-//     edge {
-//       width: 3;
-//       line-color: #ccc;
-//       target-arrow-color: #ccc;
-//       target-arrow-shape: triangle;
-//       curve-style: bezier;
-//     }
-//   `,
-// });
-
-// cy.on("tap", "node", (event) => {
-//   console.log(event.target.id());
-// });
 
 function loadGraph(elements) {
   if (cy) cy.destroy();
@@ -62,46 +13,125 @@ function loadGraph(elements) {
     container: document.getElementById("cy"),
     elements: elements,
     layout: { name: "preset" },
-    style: `
-      node {
-        label: data(id);
-        shape: rectangle;
-        background-color: #6FB1FC;
-        border-color: #4A90E2;
-        border-width: 2;
-        text-valign: center;
-        text-halign: center;
-        color: #333;
-        font-size: 14px;
-        font-weight: bold;
-        width: 100;
-        height: 50;
-        text-wrap: wrap;
-        text-max-width: 80;
+    style: [
+      {
+        selector: "node",
+        style: {
+          label: "data(id)",
+          shape: "rectangle",
+          "background-color": "#6FB1FC",
+          "border-color": "#4A90E2",
+          "border-width": 2,
+          "text-valign": "center",
+          "text-halign": "center",
+          color: "#333",
+          "font-size": 14,
+          "font-weight": "bold",
+          width: 100,
+          height: 50,
+          "text-wrap": "wrap",
+          "text-max-width": 80,
+        },
+      },
+      {
+        selector: ".parent",
+        style: {
+          "background-color": "rgb(236, 236, 236)",
+          "border-color": "rgb(158, 158, 158)",
+          "border-width": 2,
+          "text-valign": "top",
+
+        },
+      },
+      {
+        selector: "edge",
+        style: {
+          width: 3,
+          "line-color": "#ccc",
+          "target-arrow-color": "#000",
+          "target-arrow-shape": "triangle",
+          "arrow-scale": 2, 
+          "curve-style": "bezier"
+        },
+      },
+      {
+        selector: ".highlighted",
+        style: {
+          "border-color": "red",
+          "background-color": "yellow",
+        },
       }
+
+    ],
+  });
+
+  cy.on('tap', 'node', (e) => {
+    const node = e.target;
+    
+    if (node.hasClass('highlighted')) {
+      node.removeClass('highlighted');
+    } else {
+      node.addClass('highlighted');
       
-      .parent {
-        background-color:rgb(236, 236, 236);
-        border-color: rgb(158, 158, 158);
-        border-width: 2;
-        text-valign: top;
-      }
+      const bfs = cy.elements().breadthFirstSearch({
+        roots: node,
+        directed: true,
+        visit: (node, edge) => {
+          node.addClass('highlighted');
+          if (edge) edge.addClass('highlighted');
+        }
+      });
       
-      edge {
-        width: 3;
-        line-color: #ccc;
-        target-arrow-color: #ccc;
-        target-arrow-shape: triangle;
-        curve-style: bezier;
-      }
-    `,
+      const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
+      console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
+    }
+
+
   });
 }
+
+const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
+clearHighlightsBtn.addEventListener("click", () => {
+  cy.nodes().removeClass('highlighted');
+});
+
+const input = document.querySelector('.search');
+let debounceTimeout;
+
+input.addEventListener('input', () => {
+  clearTimeout(debounceTimeout); // clear the previous timer
+
+  debounceTimeout = setTimeout(() => {
+    const term = input.value.trim().toLowerCase();
+
+    // Clear previous highlights
+    cy.nodes().removeClass('highlighted');
+
+    if (term.length === 0) return;
+
+    const matches = cy.nodes().filter(node =>
+      node.data('id').toLowerCase().includes(term)
+    );
+
+    matches.addClass('highlighted');
+
+    if (matches.length > 0) {
+      cy.animate({
+        fit: {
+          eles: matches,
+          padding: 50
+        },
+        duration: 500
+      });
+    }
+  }, 300); // 300ms pause before triggering
+});
 
 const loadBtn = document.querySelector(".load");
 loadBtn.addEventListener("click", async () => {
   const res = await fetch(API_BASE + "/nodes-json/true");
   const contents = await res.json();
+  console.log(contents);
   loadGraph(contents);
 });
 
