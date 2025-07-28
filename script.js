@@ -55,10 +55,17 @@ function loadGraph(elements) {
         },
       },
       {
-        selector: ".highlighted",
+        selector: "node.highlighted",
         style: {
           "border-color": "red",
           "background-color": "yellow",
+        },
+      },
+      {
+        selector: "edge.highlighted",
+        style: {
+          "line-color": "red",
+          "target-arrow-color": "red",
         },
       }
 
@@ -92,7 +99,7 @@ function loadGraph(elements) {
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
 clearHighlightsBtn.addEventListener("click", () => {
-  cy.nodes().removeClass('highlighted');
+  cy.elements().removeClass('highlighted');
 });
 
 const input = document.querySelector('.search');
@@ -130,8 +137,7 @@ input.addEventListener('input', () => {
 const loadBtn = document.querySelector(".load");
 loadBtn.addEventListener("click", async () => {
   const res = await fetch(API_BASE + "/nodes-json/true");
-  const contents = await res.json();
-  console.log(contents);
+  const contents = await res.json();  
   loadGraph(contents);
 });
 

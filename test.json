@@ -51,7 +51,7 @@
         "Phase Changes",
         "Phase Diagrams",
         "Colligative Properties",
-        
+        "Colligative Calculations",
         "Heating Curve",
         "Calorimetry",
         "Pure vs Mixture",
@@ -86,7 +86,6 @@
         "Chemical Equation",
         "Balancing Equations",
         "Counting Atoms",
-        "Conservation of Mass",
         "Molar Mass",
         "Avogadro's #",
         "Mole Ratio",
@@ -194,7 +193,6 @@
             "Rxn Predictions",
             "Chemical Rxns",
             "Chemical Equation",
-            "Conservation of Mass",
             "Balancing Equations"
         ]},
         {"name": "Stoichiometry", "children": [
@@ -264,6 +262,7 @@
             "Phase Changes",
             "Phase Diagrams",
             "Colligative Properties",
+            "Colligative Calculations",
             "Heating Curve",
             "Percent Composition",
             "Empirical Formula",
@@ -284,15 +283,15 @@
         {"concept": "Octet/Duet Rule", "depends-on": ["Atomic LDS"]},
         {"concept": "Electronegativity", "depends-on": ["Octet/Duet Rule"]},
         {"concept": "VSEPR and Molecular Geometry", "depends-on": ["Molecular LDS"]},
-        {"concept": "Molecular LDS", "depends-on": ["Covalent Bonds"]},
+        {"concept": "Molecular LDS", "depends-on": ["Atomic LDS", "Covalent Bonds"]},
         {"concept": "Formal Charge", "depends-on": ["Molecular LDS"]},
         {"concept": "Resonance", "depends-on": ["Formal Charge"]},
 
         {"concept": "Ions", "depends-on": ["Atomic Structure"]},
-        {"concept": "Polyatomic Ions", "depends-on": ["Ions"]},
+        {"concept": "Polyatomic Ions", "depends-on": ["Ionic Bonds"]},
 
         {"concept": "Covalent Bonds", "depends-on": ["Electronegativity", "Molecules & Compounds"]},
-        {"concept": "Ionic Bonds", "depends-on": ["Ions", "Polyatomic Ions", "Molecules & Compounds"]},
+        {"concept": "Ionic Bonds", "depends-on": ["Ions", "Molecules & Compounds"]},
         {"concept": "Metallic Bonds", "depends-on": ["Ions", "Molecules & Compounds"]},
         {"concept": "Periodic Table", "depends-on": ["Elements"]},
 
@@ -319,7 +318,7 @@
 
         {"concept": "Types of Rxns", "depends-on": ["Chemical Rxns"]},
         {"concept": "Acid-Base Rxn", "depends-on": ["Chemical Rxns"]},
-        {"concept": "Molecular Naming", "depends-on": ["Covalent Bonds", "Ionic Bonds", "Counting Atoms"]},
+        {"concept": "Molecular Naming", "depends-on": ["Covalent Bonds", "Polyatomic Ions", "Counting Atoms"]},
 
         {"concept": "Chemical Rxns", "depends-on": ["Ionic Bonds", "Covalent Bonds", "Metallic Bonds"]},
         {"concept": "Crystalline Solids", "depends-on": ["Ionic Bonds", "IMF Trends", "Metallic Bonds"]},
@@ -328,6 +327,7 @@
         {"concept": "Phase Changes", "depends-on": ["Solids, Liquids, Gases"]},
         {"concept": "Phase Diagrams", "depends-on": ["Phase Changes"]},
         {"concept": "Colligative Properties", "depends-on": ["Molality", "Phase Changes", "Pure vs Mixture"], "styles": ["dashed", "solid", "solid"]},
+        {"concept": "Colligative Calculations", "depends-on": ["Colligative Properties"]},
         {"concept": "Heating Curve", "depends-on": ["Phase Diagrams", "Calorimetry"]},
 
         {"concept": "Calorimetry", "depends-on": ["Enthalpy"]},
@@ -358,8 +358,7 @@
 
         {"concept": "Counting Atoms", "depends-on": ["Molecules & Compounds"]},
         {"concept": "Chemical Equation", "depends-on": ["Chemical Rxns"]},
-        {"concept": "Conservation of Mass", "depends-on": ["Chemical Equation"]},
-        {"concept": "Balancing Equations", "depends-on": ["Conservation of Mass", "Counting Atoms"]},
+        {"concept": "Balancing Equations", "depends-on": ["Counting Atoms", "Chemical Equation"]},
         {"concept": "Mole Ratio", "depends-on": ["Balancing Equations"]},
         {"concept": "Molar Mass", "depends-on": ["Counting Atoms"]},
         {"concept": "Mole-Mass", "depends-on": ["Molar Mass"]},
