@@ -53,8 +53,19 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
     
     for e in old_dict['edges']:
         source = e['concept']
+        
+        for group in old_dict['groups']:
+            if source in group['children']:
+                parent_source = group['name'].upper()
+                break
+
         for concept in e['depends-on']:
-            new_dict['edges'].append({'data': {'source': source, 'target': concept}})
+            for group in old_dict['groups']:
+                if concept in group['children']:
+                    concept_parent = group['name'].upper()
+                    break
+
+            new_dict['edges'].append({'data': {'source': source, 'target': concept}, 'classes': 'out' if concept_parent != parent_source else ''})
     
     if use_pos:
         add_positions(new_dict)

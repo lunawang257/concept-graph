@@ -47,7 +47,7 @@ function loadGraph(elements) {
         selector: "edge",
         style: {
           width: 3,
-          "line-color": "#ccc",
+          "line-color": "#000",
           "target-arrow-color": "#000",
           "target-arrow-shape": "triangle",
           "arrow-scale": 2, 
@@ -67,7 +67,21 @@ function loadGraph(elements) {
           "line-color": "red",
           "target-arrow-color": "red",
         },
-      }
+      },
+      {
+        selector: "edge.out",
+        style: {
+          "line-color": "#E5E5E5",
+          "line-style": "dashed",
+        },
+      },
+      {
+        selector: "edge.highlighted.out",
+        style: {
+          "line-color": "red",
+          "target-arrow-color": "red",
+        },
+      },
 
     ],
   });
@@ -75,25 +89,20 @@ function loadGraph(elements) {
   cy.on('tap', 'node', (e) => {
     const node = e.target;
     
-    if (node.hasClass('highlighted')) {
-      node.removeClass('highlighted');
-    } else {
-      node.addClass('highlighted');
+    cy.elements().removeClass('highlighted');
+    
+    // Highlight the node and all its dependencies
+    const bfs = cy.elements().breadthFirstSearch({
+      roots: node,
+      directed: true,
+      visit: (node, edge) => {
+        node.addClass('highlighted');
+        if (edge) edge.addClass('highlighted');
+      }
+    });
       
-      const bfs = cy.elements().breadthFirstSearch({
-        roots: node,
-        directed: true,
-        visit: (node, edge) => {
-          node.addClass('highlighted');
-          if (edge) edge.addClass('highlighted');
-        }
-      });
-      
-      const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
-      console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
-    }
-
-
+    const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
+    console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
   });
 }
 
@@ -112,7 +121,7 @@ input.addEventListener('input', () => {
     const term = input.value.trim().toLowerCase();
 
     // Clear previous highlights
-    cy.nodes().removeClass('highlighted');
+    cy.elements().removeClass('highlighted');
 
     if (term.length === 0) return;
 
