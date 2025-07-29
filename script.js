@@ -96,7 +96,7 @@ function loadGraph(elements) {
 
     cy.elements().removeClass('highlighted tapped');
     node.addClass('tapped');
-    
+
     // Highlight the node and all its dependencies
     const bfs = cy.elements().breadthFirstSearch({
       roots: node,
