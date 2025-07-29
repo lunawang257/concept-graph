@@ -29,21 +29,21 @@ def add_positions(contents: dict) -> None:
 
 def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
     new_dict = {'nodes': [], 'edges': []}
-    all_nodes: dict[str, str] = {}
+    node_parents: dict[str, str] = {}
     for n in old_dict['nodes']:
-        all_nodes[n] = ''
+        node_parents[n] = ''
     
     if ('groups' in old_dict):
         for group in old_dict['groups']:
-            all_nodes[group['name'].upper()] = ''
+            node_parents[group['name'].upper()] = ''
 
         for group in old_dict['groups']:
             parent: str = group['name'].upper()
             children = group['children']
             for c in children:
-                all_nodes[c] = parent
+                node_parents[c] = parent
 
-    for node_name, parent in all_nodes.items():
+    for node_name, parent in node_parents.items():
         node: dict = {'data': {'id': node_name}}
         if (node_name.upper() == node_name):
             node['classes'] = 'parent'
@@ -51,22 +51,15 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
             node['data']['parent'] = parent
         new_dict['nodes'].append(node)
     
-
     for e in old_dict['edges']:
         source = e['concept']
-        
-        for group in old_dict['groups']:
-            if source in group['children']:
-                parent_source = group['name'].upper()
-                break
-
+        parent_source = node_parents[source]
         for concept in e['depends-on']:
-            for group in old_dict['groups']:
-                if concept in group['children']:
-                    parent_concept = group['name'].upper()
-                    break
-
-            new_dict['edges'].append({'data': {'source': source, 'target': concept}, 'classes': 'out' if parent_concept != parent_source else ''})
+            parent_concept = node_parents[concept]
+            out = 'out' if parent_concept != parent_source else ''
+            new_dict['edges'].append({
+                'data': {'source': source, 'target': concept}, 
+                'classes': out})
     
     if use_pos:
         add_positions(new_dict)
