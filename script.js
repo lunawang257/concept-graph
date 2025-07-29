@@ -18,35 +18,31 @@ function loadGraph(elements) {
         selector: "node",
         style: {
           label: "data(id)",
-          shape: "rectangle",
-          "background-color": "#6FB1FC",
-          "border-color": "#4A90E2",
+          shape: "roundrectangle",
+          "background-color": "#F4F4F4",
+          "border-color": "#F4F4F4",
           "border-width": 2,
           "text-valign": "center",
           "text-halign": "center",
-          color: "#333",
+          color: "black",
           "font-size": 14,
-          "font-weight": "bold",
-          width: 100,
-          height: 50,
-          "text-wrap": "wrap",
-          "text-max-width": 80,
+          "width": (node) => { return node.data('id').length * 7 },
+          padding: 10,
         },
       },
       {
         selector: ".parent",
         style: {
-          "background-color": "rgb(236, 236, 236)",
-          "border-color": "rgb(158, 158, 158)",
+          "background-color": "white",
+          "border-color": "#D9D9D9",
           "border-width": 2,
           "text-valign": "top",
-
         },
       },
       {
         selector: "edge",
         style: {
-          width: 3,
+          width: 2.5,
           "line-color": "#000",
           "target-arrow-color": "#000",
           "target-arrow-shape": "triangle",
@@ -57,15 +53,15 @@ function loadGraph(elements) {
       {
         selector: "node.highlighted",
         style: {
-          "border-color": "red",
-          "background-color": "yellow",
+          "border-color": "#497DFF",
+          "background-color": "#98B5FF",
         },
       },
       {
         selector: "edge.highlighted",
         style: {
-          "line-color": "red",
-          "target-arrow-color": "red",
+          "line-color": "#497DFF",
+          "target-arrow-color": "#497DFF",
         },
       },
       {
@@ -73,13 +69,21 @@ function loadGraph(elements) {
         style: {
           "line-color": "#E5E5E5",
           "line-style": "dashed",
+          width: 1,
         },
       },
       {
         selector: "edge.highlighted.out",
         style: {
-          "line-color": "red",
-          "target-arrow-color": "red",
+          "line-color": "#497DFF",
+          "target-arrow-color": "#497DFF",
+        },
+      },
+      {
+        selector: "node.tapped",
+        style: {
+          "background-color": "#497DFF",
+          color: "white",
         },
       },
 
@@ -88,8 +92,9 @@ function loadGraph(elements) {
 
   cy.on('tap', 'node', (e) => {
     const node = e.target;
-    
-    cy.elements().removeClass('highlighted');
+
+    cy.elements().removeClass('highlighted tapped');
+    node.addClass('tapped');
     
     // Highlight the node and all its dependencies
     const bfs = cy.elements().breadthFirstSearch({
@@ -108,7 +113,7 @@ function loadGraph(elements) {
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
 clearHighlightsBtn.addEventListener("click", () => {
-  cy.elements().removeClass('highlighted');
+  cy.elements().removeClass('highlighted tapped');
 });
 
 const input = document.querySelector('.search');
@@ -121,11 +126,11 @@ input.addEventListener('input', () => {
     const term = input.value.trim().toLowerCase();
 
     // Clear previous highlights
-    cy.elements().removeClass('highlighted');
+    cy.elements().removeClass('highlighted tapped');
 
     if (term.length === 0) return;
 
-    const matches = cy.nodes().filter(node =>
+    const matches = cy.nodes().not('.parent').filter(node =>
       node.data('id').toLowerCase().includes(term)
     );
 
