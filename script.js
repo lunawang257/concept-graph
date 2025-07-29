@@ -37,6 +37,7 @@ function loadGraph(elements) {
           "border-color": "#D9D9D9",
           "border-width": 2,
           "text-valign": "top",
+          "font-size": 25
         },
       },
       {
