@@ -59,6 +59,14 @@ function loadGraph(elements) {
         },
       },
       {
+        selector: ".parent.highlighted",
+        style: {
+          "border-color": "#497DFF",
+          "background-color": "white",
+          color: "#497DFF",
+        },
+      },
+      {
         selector: "edge.highlighted",
         style: {
           "line-color": "#497DFF",
@@ -87,8 +95,10 @@ function loadGraph(elements) {
           color: "white",
         },
       },
-
     ],
+    wheelSensitivity: 0.1,
+    minZoom: 0.2,
+    maxZoom: 1,
   });
 
   cy.on('tap', 'node', (e) => {
@@ -131,7 +141,7 @@ input.addEventListener('input', () => {
 
     if (term.length === 0) return;
 
-    const matches = cy.nodes().not('.parent').filter(node =>
+    const matches = cy.nodes().filter(node =>
       node.data('id').toLowerCase().includes(term)
     );
 
@@ -171,5 +181,16 @@ posBtn.addEventListener("click", () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(positions),
+  });
+});
+
+
+const toggleBtns = document.querySelectorAll('.toggle-button');
+const toggleLists = document.querySelectorAll('.toggle-list');
+
+toggleBtns.forEach((btn, index) => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    toggleLists[index].classList.toggle('active');
   });
 });
