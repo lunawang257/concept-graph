@@ -187,10 +187,3 @@ posBtn.addEventListener("click", () => {
 
 const toggleBtns = document.querySelectorAll('.toggle-button');
 const toggleLists = document.querySelectorAll('.toggle-list');
-
-toggleBtns.forEach((btn, index) => {
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('active');
-    toggleLists[index].classList.toggle('active');
-  });
-});
