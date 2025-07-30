@@ -5,14 +5,14 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
-function fitGraph(cy) {
+function fitGraph() {
   cy.animate({
     fit: {
       eles: cy.elements(),
       padding: 50
     }
   })
-}
+};
 
 function loadGraph(elements) {
   if (cy) cy.destroy();
@@ -147,17 +147,17 @@ function loadGraph(elements) {
       bbox.y2 < viewportExtent.y1 || 
       bbox.y1 > viewportExtent.y2;  
 
-    if (isOutOfView) {fitGraph(cy)}
-  })
-}
+    if (isOutOfView) fitGraph();
+  });
+};
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
 clearHighlightsBtn.addEventListener("click", () => {
   cy.elements().removeClass('highlighted tapped');
 });
 
-const fitBtn = document.querySelector(".fit-btn")
-fitBtn.addEventListener("click", () => fitGraph(cy))
+const fitBtn = document.querySelector(".fit-btn");
+fitBtn.addEventListener("click", fitGraph);
 
 const input = document.querySelector('.search');
 let debounceTimeout;
