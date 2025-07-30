@@ -5,6 +5,14 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
+function fitGraph(cy) {
+  cy.animate({
+    fit: {
+      eles: cy.elements(),
+      padding: 50
+    }
+  })
+}
 
 function loadGraph(elements) {
   if (cy) cy.destroy();
@@ -97,7 +105,7 @@ function loadGraph(elements) {
       },
     ],
     wheelSensitivity: 0.1,
-    minZoom: 0.2,
+    minZoom: 0.05,
     maxZoom: 1,
   });
 
@@ -120,12 +128,28 @@ function loadGraph(elements) {
     const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
     console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
   });
+
+  cy.on('mouseup', () => {
+    const bbox = cy.elements().boundingBox();
+    const viewportExtent = cy.extent();
+
+    const isOutOfView =
+      bbox.x2 < viewportExtent.x1 || 
+      bbox.x1 > viewportExtent.x2 || 
+      bbox.y2 < viewportExtent.y1 || 
+      bbox.y1 > viewportExtent.y2;  
+
+    if (isOutOfView) {fitGraph(cy)}
+  })
 }
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
 clearHighlightsBtn.addEventListener("click", () => {
   cy.elements().removeClass('highlighted tapped');
 });
+
+const fitBtn = document.querySelector(".fit-btn")
+fitBtn.addEventListener("click", () => fitGraph(cy))
 
 const input = document.querySelector('.search');
 let debounceTimeout;
