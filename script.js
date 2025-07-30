@@ -103,6 +103,14 @@ function loadGraph(elements) {
           color: "white",
         },
       },
+      {
+        selector: ".parent.tapped",
+        style: {
+          "border-color": "#497DFF",
+          "background-color": "white",
+          color: "#497DFF",
+        },
+      },
     ],
     wheelSensitivity: 0.1,
     minZoom: 0.05,
