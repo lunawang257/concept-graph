@@ -33,7 +33,7 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
     new_dict = {'nodes': [], 'edges': []}
     nodes_and_parents: dict[str, str] = {}
 
-    #append nodes to new_dict
+    # append nodes to new_dict
     if 'groups' in old_dict:
         for group in old_dict['groups']:
             parent: str = group['parent'].upper()
@@ -49,14 +49,14 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
 
                 nodes_and_parents[c] = parent
     
-    if 'nodes without a parent' in old_dict:
-        for n in old_dict['nodes without a parent']:
+    if 'parentless nodes' in old_dict:
+        for n in old_dict['parentless nodes']:
             node: dict = {'data': {'id': n}}
             new_dict['nodes'].append(node)
 
             nodes_and_parents[n] = ''
 
-    #append edges to new_dict
+    # append edges to new_dict
     for e in old_dict['edges']:
         source = e['concept']
         parent_source = nodes_and_parents[source]

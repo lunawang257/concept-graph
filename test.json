@@ -1,5 +1,5 @@
 {
-    "nodes without a parent": [
+    "parentless nodes": [
         "K constant",
         "RICE Table"
     ],
