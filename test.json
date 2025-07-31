@@ -1,132 +1,10 @@
 {
-    "nodes": [
-        "Atomic Structure",
-        "Elements",
-        "Isotopes",
-        "Isotopic Notation",
-        "Valence Electrons",
-        "Ions",
-        "Molecules & Compounds",
-        "Covalent Bonds",
-        "Ionic Bonds",
-        "Metallic Bonds",
-        "Periodic Table",
-        "Electronegativity",
-        "Octet/Duet Rule",
-        "Atomic LDS",
-        "Molecular LDS",
-        "Polyatomic Ions",
-        "Average Atomic Mass",
-        "Isotopic Abundance",
-        "Mass Spectrometry",
-        "Atomic Misc (History, Size, etc.)",
-        "VSEPR and Molecular Geometry",
-        "Formal Charge",
-        "Resonance",
-        "Bohr Model",
-        "Quantum Model",
-        "Quantum Numbers",
-        "Electron Configuration",
-        "Orbital Diagram",
-        "Rules (Aufbau, Hund, Pauli)",
-        "Atomic Radius & Other Trends",
-        "Atomic Emission Spectrum",
-        "Noble Gas Configuration",
-        "Valence Bond Theory",
-        "Bond Hybridization",
-        "Energy Calculations",
-
-        "Types of Rxns",
-        "Acid-Base Rxn",
-        "Molecular Naming",
-        "Solubility Rules",
-        "Activity Series", 
-        "Chemical Rxns",
-
-
-        "Crystalline Solids",
-        "Rxn Predictions",
-
-        "Solids, Liquids, Gases",
-        "Phase Changes",
-        "Phase Diagrams",
-        "Colligative Properties",
-        "Colligative Calculations",
-        "Heating Curve",
-        "Calorimetry",
-        "Pure vs Mixture",
-
-        "Enthalpy",
-        "Energy Diagram",
-        "Energy",
-        "Heat Stoichiometry",
-        "Enthalpy of Formation",
-        "Enthalpy of Reaction",
-        "Hess's Law",
-        "Entropy",
-        "Gibbs Free Energy",
-
-        "Polarity",
-        "Intermolecular Forces",
-        "Types of IMFs",
-        "IMF Trends",
-
-        "Solution",
-        "Solubility & Saturation",
-        "Molarity",
-        "Molality",
-        "Dilution",
-
-        "Homo vs Hetero",
-        "Spectrophotometry",
-        "Beer's Law",
-        "Serparation Techniques",
-        "Density",
-
-        "Chemical Equation",
-        "Balancing Equations",
-        "Counting Atoms",
-        "Molar Mass",
-        "Avogadro's #",
-        "Mole Ratio",
-        "Mass-Particle",
-        "Mole-Mass",
-        "Mole-Particle",
-        "Mole-Mole",
-        "Limiting Reactant",
-        "Excess Reactant",
-        "Theoretical, Actual, and Percent Yield",        
-
-        "Gas Stoichiometry",
-        "Gas Properties",
-        "Ideal Gas Law",
-        "Partial Pressure",
-        "Boyle's Law",
-        "Charles's Law",
-        "Gay-Lussac's Law",
-
-        "Scientific Notation",
-
-        "Percent Composition",
-        "Empirical Formula",
-
-        "Acids & Bases",
-        "Arrhenius",
-        "Naming Acids & Bases",
-        "pH & Indicators",
-        "[H+], [OH-], Kw, pOH, pKw",
-        "Ka, pKa",
-        "Strength",
-        "Bronsted-Lowry",
-        "Conjugate Pairs",
-        "Henderson-Hasselbalch",
-        "Titration",
-
+    "nodes without a parent": [
         "K constant",
         "RICE Table"
     ],
     "groups": [
-        {"name": "Atoms", "children": [
+        {"parent": "Atoms", "children": [
             "Atomic Structure", 
             "Elements", 
             "Isotopes", 
@@ -152,7 +30,7 @@
             "Isotopic Notation",
             "Mass Spectrometry"
         ]},
-        {"name": "Molecules & Compounds", "children": [
+        {"parent": "Molecules & Compounds", "children": [
             "Molecules & Compounds",
             "Covalent Bonds",
             "Ionic Bonds",
@@ -168,14 +46,14 @@
             "Molecular Naming",
             "Counting Atoms"
         ]},
-        {"name": "Intermolecular Forces", "children": [
+        {"parent": "Intermolecular Forces", "children": [
             "Polarity",
             "Intermolecular Forces",
             "Types of IMFs",
             "IMF Trends",
             "Crystalline Solids"
         ]},
-        {"name": "Solution", "children": [
+        {"parent": "Solution", "children": [
             "Solution",
             "Solubility & Saturation",
             "Molarity",
@@ -186,7 +64,7 @@
             "Beer's Law",
             "Serparation Techniques"
         ]},
-        {"name": "Chemical Rxns", "children": [
+        {"parent": "Chemical Rxns", "children": [
             "Types of Rxns",
             "Solubility Rules",
             "Activity Series",
@@ -195,7 +73,7 @@
             "Chemical Equation",
             "Balancing Equations"
         ]},
-        {"name": "Stoichiometry", "children": [
+        {"parent": "Stoichiometry", "children": [
             "Mass-Particle",
             "Mole Ratio",
             "Molar Mass",
@@ -207,7 +85,7 @@
             "Theoretical, Actual, and Percent Yield",
             "Avogadro's #"
         ]},
-        {"name": "Gas Laws", "children": [
+        {"parent": "Gas Laws", "children": [
             "Gas Stoichiometry",
             "Gas Properties",
             "Ideal Gas Law",
@@ -216,7 +94,7 @@
             "Charles's Law",
             "Gay-Lussac's Law"
         ]},
-        {"name": "Acids & Bases", "children": [
+        {"parent": "Acids & Bases", "children": [
             "Acid-Base Rxn",
             "Acids & Bases",
             "Arrhenius",
@@ -230,7 +108,7 @@
             "Henderson-Hasselbalch",
             "Titration"
         ]},
-        {"name": "Energy", "children": [
+        {"parent": "Energy", "children": [
             "Enthalpy",
             "Energy Diagram",
             "Energy",
@@ -242,21 +120,21 @@
             "Gibbs Free Energy",
             "Calorimetry"
         ]},
-        {"name": "Kinetics", "children": [
+        {"parent": "Kinetics", "children": [
             "Kinetics",
             "Rate Law",
             "Rate Constant",
             "Rate Order",
             "Reaction Mechanism"
         ]},
-        {"name": "Equilibrium", "children": [
+        {"parent": "Equilibrium", "children": [
             "Equilibrium",
             "Le Chatelier's Principle",
             "Equilibrium Constant",
             "Kc",
             "Kp"
         ]},
-        {"name": "Physical Properties", "children": [
+        {"parent": "Physical Properties", "children": [
             "Density",
             "Solids, Liquids, Gases",
             "Phase Changes",
@@ -268,7 +146,7 @@
             "Empirical Formula",
             "Pure vs Mixture"
         ]},
-        {"name": "Math", "children": [
+        {"parent": "Math", "children": [
             "Scientific Notation"
         ]}
     ],
