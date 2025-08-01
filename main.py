@@ -83,8 +83,8 @@ def get_toggle_list(old_dict: dict) -> dict:
 
             new_dict[parent] = children
 
-    if 'nodes without a parent' in old_dict:
-        new_dict[''] = old_dict['nodes without a parent']
+    if 'parentless nodes' in old_dict:
+        new_dict[''] = old_dict['parentless nodes']
 
     return new_dict
 
