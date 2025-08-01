@@ -5,6 +5,31 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
+fetch(API_BASE + "/load-toggle")
+  .then((d) => d.json())
+  .then(loadToggle)
+
+function loadToggle(data) {
+  const menuContainer = document.querySelector('.menu');
+
+  for (const [parent, children] of Object.entries(data)) {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = parent;
+
+    const ul = document.createElement("ul");
+    for (const child of children) {
+      const li = document.createElement("li");
+      li.textContent = child;
+      ul.appendChild(li);
+    }
+
+    details.appendChild(summary);
+    details.appendChild(ul);
+    menuContainer.appendChild(details);
+  }
+}
+
 function fitGraph() {
   cy.animate({
     fit: {
@@ -215,7 +240,3 @@ posBtn.addEventListener("click", () => {
     body: JSON.stringify(positions),
   });
 });
-
-
-const toggleBtns = document.querySelectorAll('.toggle-button');
-const toggleLists = document.querySelectorAll('.toggle-list');

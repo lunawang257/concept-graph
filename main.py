@@ -12,6 +12,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+filename = 'test.json'
+
 def add_positions(contents: dict) -> None:
     try:
         with open('positions.json', 'r') as f:
@@ -72,10 +74,38 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
 
     return new_dict
 
+def get_toggle_list(old_dict: dict) -> dict:
+    new_dict = {}
+
+    if 'groups' in old_dict:
+        for group in old_dict['groups']:
+            parent: str = group['parent'].upper()
+            children: list[str] = group['children']
+
+            new_dict[parent] = children
+
+    if 'nodes without a parent' in old_dict:
+        new_dict[''] = old_dict['nodes without a parent']
+
+    return new_dict
+
+@app.get('/load-toggle')
+def load_toggle():
+    try:
+        with open(filename, 'r') as file:
+            data = json.load(file)
+            new_dict: dict = get_toggle_list(data)
+            print(new_dict)
+        return new_dict
+    except FileNotFoundError:
+        return {'error': f'File {filename} not found'}
+    except json.JSONDecodeError:
+        return {'error': f'Invalid JSON in {filename}'}
+    except Exception as e:
+        return {'error': f'Unexpected error: {str(e)}'}
+
 @app.get('/nodes-json/{use_pos}')
 def parse_nodes_json(use_pos: bool) -> dict:
-    filename = 'test.json'
-    
     try:
         with open(filename, 'r') as file:
             data = json.load(file)
