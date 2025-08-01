@@ -3,6 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+FILE_NAME = 'test.json'
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -11,8 +12,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-filename = 'test.json'
 
 def add_positions(contents: dict) -> None:
     try:
@@ -92,29 +91,29 @@ def get_toggle_list(old_dict: dict) -> dict:
 @app.get('/load-toggle')
 def load_toggle():
     try:
-        with open(filename, 'r') as file:
+        with open(FILE_NAME, 'r') as file:
             data = json.load(file)
             new_dict: dict = get_toggle_list(data)
             print(new_dict)
         return new_dict
     except FileNotFoundError:
-        return {'error': f'File {filename} not found'}
+        return {'error': f'File {FILE_NAME} not found'}
     except json.JSONDecodeError:
-        return {'error': f'Invalid JSON in {filename}'}
+        return {'error': f'Invalid JSON in {FILE_NAME}'}
     except Exception as e:
         return {'error': f'Unexpected error: {str(e)}'}
 
 @app.get('/nodes-json/{use_pos}')
 def parse_nodes_json(use_pos: bool) -> dict:
     try:
-        with open(filename, 'r') as file:
+        with open(FILE_NAME, 'r') as file:
             data = json.load(file)
             new_dict: dict = turn_into_cyto(data, use_pos)
         return new_dict
     except FileNotFoundError:
-        return {'error': f'File {filename} not found'}
+        return {'error': f'File {FILE_NAME} not found'}
     except json.JSONDecodeError:
-        return {'error': f'Invalid JSON in {filename}'}
+        return {'error': f'Invalid JSON in {FILE_NAME}'}
     except Exception as e:
         return {'error': f'Unexpected error: {str(e)}'}
 
