@@ -7,20 +7,76 @@ fetch(API_BASE + "/nodes-json/true")
 
 fetch(API_BASE + "/load-toggle")
   .then((d) => d.json())
-  .then(loadToggle)
+  .then(loadToggle);
+
+function animateToFit(eles, duration = 300) {
+  cy.animate({
+    fit: {
+      eles: eles,
+      padding: 30,
+    },
+    duration: duration, // milliseconds
+  });
+}
+
+function handleClick(node) {
+  cy.elements().removeClass("highlighted tapped");
+  node.addClass("tapped");
+
+  if (node.hasClass("parent")) {
+    animateToFit(node, 500);
+    return;
+  }
+
+  // Highlight the node and all its dependencies
+  const bfs = cy.elements().breadthFirstSearch({
+    roots: node,
+    directed: true,
+    visit: (node, edge) => {
+      node.addClass("highlighted");
+      if (edge) edge.addClass("highlighted");
+    },
+  });
+
+  const resultNodes = bfs.path.filter((ele) => ele.isNode());
+  animateToFit(resultNodes);
+
+  // List out all the topics user needs to learn in console
+  // const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
+  // console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
+}
 
 function loadToggle(data) {
-  const menuContainer = document.querySelector('.menu');
+  const menuContainer = document.querySelector(".menu");
 
-  for (const [parent, children] of Object.entries(data)) {
+  const sortedItems = Object.entries(data).sort((a, b) =>
+    a[0].localeCompare(b[0])
+  );
+  for (const [parent, children] of sortedItems) {
     const details = document.createElement("details");
+    details.setAttribute("name", "content");
+
     const summary = document.createElement("summary");
     summary.textContent = parent;
+    summary.addEventListener("click", () => {
+      const node = cy.getElementById(parent);
+      handleClick(node);
+    });
 
     const ul = document.createElement("ul");
-    for (const child of children) {
+    const sortedChildren = children.slice().sort((a, b) => a.localeCompare(b));
+    for (const child of sortedChildren) {
       const li = document.createElement("li");
       li.textContent = child;
+      li.addEventListener("click", () => {
+        const clickedItem = document.querySelector("li.clicked");
+        if (clickedItem) clickedItem.classList.remove("clicked");
+
+        const node = cy.getElementById(child);
+        handleClick(node);
+
+        li.classList.add("clicked");
+      });
       ul.appendChild(li);
     }
 
@@ -29,15 +85,6 @@ function loadToggle(data) {
     menuContainer.appendChild(details);
   }
 }
-
-function fitGraph() {
-  cy.animate({
-    fit: {
-      eles: cy.elements(),
-      padding: 50
-    }
-  })
-};
 
 function loadGraph(elements) {
   if (cy) cy.destroy();
@@ -59,7 +106,9 @@ function loadGraph(elements) {
           "text-halign": "center",
           color: "black",
           "font-size": 14,
-          "width": (node) => { return node.data('id').length * 7 },
+          width: (node) => {
+            return node.data("id").length * 7;
+          },
           padding: 10,
         },
       },
@@ -70,7 +119,7 @@ function loadGraph(elements) {
           "border-color": "#D9D9D9",
           "border-width": 2,
           "text-valign": "top",
-          "font-size": 25
+          "font-size": 25,
         },
       },
       {
@@ -80,8 +129,8 @@ function loadGraph(elements) {
           "line-color": "#000",
           "target-arrow-color": "#000",
           "target-arrow-shape": "triangle",
-          "arrow-scale": 2, 
-          "curve-style": "bezier"
+          "arrow-scale": 2,
+          "curve-style": "bezier",
         },
       },
       {
@@ -142,84 +191,61 @@ function loadGraph(elements) {
     maxZoom: 1,
   });
 
-  cy.on('tap', 'node', (e) => {
+  cy.on("tap", "node", (e) => {
     const node = e.target;
-
-    cy.elements().removeClass('highlighted tapped');
-    node.addClass('tapped');
-
-    // Highlight the node and all its dependencies
-    const bfs = cy.elements().breadthFirstSearch({
-      roots: node,
-      directed: true,
-      visit: (node, edge) => {
-        node.addClass('highlighted');
-        if (edge) edge.addClass('highlighted');
-      }
-    });
-      
-    const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
-    console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
+    handleClick(node);
   });
 
-  cy.on('mouseup', () => {
+  cy.on("mouseup", () => {
     const bbox = cy.elements().boundingBox();
     const viewportExtent = cy.extent();
 
     const isOutOfView =
-      bbox.x2 < viewportExtent.x1 || 
-      bbox.x1 > viewportExtent.x2 || 
-      bbox.y2 < viewportExtent.y1 || 
-      bbox.y1 > viewportExtent.y2;  
+      bbox.x2 < viewportExtent.x1 ||
+      bbox.x1 > viewportExtent.x2 ||
+      bbox.y2 < viewportExtent.y1 ||
+      bbox.y1 > viewportExtent.y2;
 
-    if (isOutOfView) fitGraph();
+    if (isOutOfView) animateToFit(cy.elements());
   });
-};
+}
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
 clearHighlightsBtn.addEventListener("click", () => {
-  cy.elements().removeClass('highlighted tapped');
+  cy.elements().removeClass("highlighted tapped");
 });
 
 const fitBtn = document.querySelector(".fit-btn");
-fitBtn.addEventListener("click", fitGraph);
+fitBtn.addEventListener("click", () => animateToFit(cy.elements()));
 
-const input = document.querySelector('.search');
+const input = document.querySelector(".search");
 let debounceTimeout;
 
-input.addEventListener('input', () => {
+input.addEventListener("input", () => {
   clearTimeout(debounceTimeout); // clear the previous timer
 
   debounceTimeout = setTimeout(() => {
     const term = input.value.trim().toLowerCase();
 
     // Clear previous highlights
-    cy.elements().removeClass('highlighted tapped');
+    cy.elements().removeClass("highlighted tapped");
 
     if (term.length === 0) return;
 
-    const matches = cy.nodes().filter(node =>
-      node.data('id').toLowerCase().includes(term)
-    );
+    const matches = cy
+      .nodes()
+      .filter((node) => node.data("id").toLowerCase().includes(term));
 
-    matches.addClass('highlighted');
+    matches.addClass("highlighted");
 
-    if (matches.length > 0) {
-      cy.animate({
-        fit: {
-          eles: matches,
-          padding: 50
-        },
-        duration: 500
-      });
-    }
+    if (matches.length > 0) animateToFit(matches);
   }, 300); // 300ms pause before triggering
 });
 
 const loadBtn = document.querySelector(".load");
 loadBtn.addEventListener("click", async () => {
   const res = await fetch(API_BASE + "/nodes-json/true");
-  const contents = await res.json();  
+  const contents = await res.json();
   loadGraph(contents);
 });
 
