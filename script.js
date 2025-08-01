@@ -9,22 +9,22 @@ fetch(API_BASE + "/load-toggle")
   .then((d) => d.json())
   .then(loadToggle);
 
-function animate(eles, duration = 300) {
+function animateToFit(eles, duration = 300) {
   cy.animate({
     fit: {
       eles: eles,
       padding: 30,
     },
-    duration: duration, //milliseconds
+    duration: duration, // milliseconds
   });
 }
 
-function clicked(node) {
+function handleClick(node) {
   cy.elements().removeClass("highlighted tapped");
   node.addClass("tapped");
 
   if (node.hasClass("parent")) {
-    animate(node, 500);
+    animateToFit(node, 500);
     return;
   }
 
@@ -39,7 +39,7 @@ function clicked(node) {
   });
 
   const resultNodes = bfs.path.filter((ele) => ele.isNode());
-  animate(resultNodes);
+  animateToFit(resultNodes);
 
   // List out all the topics user needs to learn in console
   // const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
@@ -49,10 +49,10 @@ function clicked(node) {
 function loadToggle(data) {
   const menuContainer = document.querySelector(".menu");
 
-  const sortedParents = Object.entries(data).sort((a, b) =>
+  const sortedItems = Object.entries(data).sort((a, b) =>
     a[0].localeCompare(b[0])
   );
-  for (const [parent, children] of sortedParents) {
+  for (const [parent, children] of sortedItems) {
     const details = document.createElement("details");
     details.setAttribute("name", "content");
 
@@ -60,7 +60,7 @@ function loadToggle(data) {
     summary.textContent = parent;
     summary.addEventListener("click", () => {
       const node = cy.getElementById(parent);
-      clicked(node);
+      handleClick(node);
     });
 
     const ul = document.createElement("ul");
@@ -69,11 +69,11 @@ function loadToggle(data) {
       const li = document.createElement("li");
       li.textContent = child;
       li.addEventListener("click", () => {
-        const lists = document.querySelectorAll("li");
-        for (const list of lists) list.classList.remove("clicked");
+        const clickedItem = document.querySelector("li.clicked");
+        if (clickedItem) clickedItem.classList.remove("clicked");
 
         const node = cy.getElementById(child);
-        clicked(node);
+        handleClick(node);
 
         li.classList.add("clicked");
       });
@@ -193,7 +193,7 @@ function loadGraph(elements) {
 
   cy.on("tap", "node", (e) => {
     const node = e.target;
-    clicked(node);
+    handleClick(node);
   });
 
   cy.on("mouseup", () => {
@@ -206,7 +206,7 @@ function loadGraph(elements) {
       bbox.y2 < viewportExtent.y1 ||
       bbox.y1 > viewportExtent.y2;
 
-    if (isOutOfView) animate(cy.elements());
+    if (isOutOfView) animateToFit(cy.elements());
   });
 }
 
@@ -216,7 +216,7 @@ clearHighlightsBtn.addEventListener("click", () => {
 });
 
 const fitBtn = document.querySelector(".fit-btn");
-fitBtn.addEventListener("click", () => animate(cy.elements()));
+fitBtn.addEventListener("click", () => animateToFit(cy.elements()));
 
 const input = document.querySelector(".search");
 let debounceTimeout;
@@ -238,7 +238,7 @@ input.addEventListener("input", () => {
 
     matches.addClass("highlighted");
 
-    if (matches.length > 0) animate(matches);
+    if (matches.length > 0) animateToFit(matches);
   }, 300); // 300ms pause before triggering
 });
 
