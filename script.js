@@ -15,28 +15,16 @@ function animateToFit(eles, duration = 300) {
       eles: eles,
       padding: 30,
     },
-<<<<<<< HEAD
     duration: duration, // milliseconds
   });
 }
 
 function handleClick(node) {
-=======
-    duration: duration, //milliseconds
-  });
-}
-
-function clicked(node) {
->>>>>>> 50c110a (fixed typos)
   cy.elements().removeClass("highlighted tapped");
   node.addClass("tapped");
 
   if (node.hasClass("parent")) {
-<<<<<<< HEAD
     animateToFit(node, 500);
-=======
-    animate(node, 500);
->>>>>>> 50c110a (fixed typos)
     return;
   }
 
@@ -51,11 +39,7 @@ function clicked(node) {
   });
 
   const resultNodes = bfs.path.filter((ele) => ele.isNode());
-<<<<<<< HEAD
   animateToFit(resultNodes);
-=======
-  animate(resultNodes);
->>>>>>> 50c110a (fixed typos)
 
   // List out all the topics user needs to learn in console
   // const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
@@ -65,17 +49,10 @@ function clicked(node) {
 function loadToggle(data) {
   const menuContainer = document.querySelector(".menu");
 
-<<<<<<< HEAD
   const sortedItems = Object.entries(data).sort((a, b) =>
     a[0].localeCompare(b[0])
   );
   for (const [parent, children] of sortedItems) {
-=======
-  const sortedParents = Object.entries(data).sort((a, b) =>
-    a[0].localeCompare(b[0])
-  );
-  for (const [parent, children] of sortedParents) {
->>>>>>> 50c110a (fixed typos)
     const details = document.createElement("details");
     details.setAttribute("name", "content");
 
@@ -92,21 +69,12 @@ function loadToggle(data) {
       const li = document.createElement("li");
       li.textContent = child;
       li.addEventListener("click", () => {
-<<<<<<< HEAD
         const clickedItem = document.querySelector("li.clicked");
         if (clickedItem) clickedItem.classList.remove("clicked");
 
         const node = cy.getElementById(child);
         handleClick(node);
 
-=======
-        const lists = document.querySelectorAll("li");
-        for (const list of lists) list.classList.remove("clicked");
-
-        const node = cy.getElementById(child);
-        clicked(node);
-
->>>>>>> 50c110a (fixed typos)
         li.classList.add("clicked");
       });
       ul.appendChild(li);
@@ -270,11 +238,7 @@ input.addEventListener("input", () => {
 
     matches.addClass("highlighted");
 
-<<<<<<< HEAD
     if (matches.length > 0) animateToFit(matches);
-=======
-    if (matches.length > 0) animate(matches);
->>>>>>> 50c110a (fixed typos)
   }, 300); // 300ms pause before triggering
 });
 
