@@ -9,18 +9,72 @@ fetch(API_BASE + "/load-toggle")
   .then((d) => d.json())
   .then(loadToggle)
 
+function animate(eles, duration = 300) {
+  cy.animate({
+    fit: {
+      eles: eles,
+      padding: 30
+    },
+    duration: duration //milliseconds
+  });
+}
+
+function clicked(node) {
+  cy.elements().removeClass('highlighted tapped');
+  node.addClass('tapped');
+
+  if (node.hasClass('parent')) {
+    animate(node, 500);
+    return;
+  }
+
+  // Highlight the node and all its dependencies
+  const bfs = cy.elements().breadthFirstSearch({
+    roots: node,
+    directed: true,
+    visit: (node, edge) => {
+      node.addClass('highlighted');
+      if (edge) edge.addClass('highlighted');
+    }
+  });
+
+  const resultNodes = bfs.path.filter(ele => ele.isNode());
+  animate(resultNodes);
+
+  // List out all the topics user needs to learn in console
+  // const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
+  // console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
+}
+
 function loadToggle(data) {
   const menuContainer = document.querySelector('.menu');
-
-  for (const [parent, children] of Object.entries(data)) {
+  
+  const sortedParents = Object.entries(data).sort((a, b) => a[0].localeCompare(b[0]));
+  for (const [parent, children] of sortedParents) {
     const details = document.createElement("details");
+    details.setAttribute('name', 'content')
+
     const summary = document.createElement("summary");
     summary.textContent = parent;
+    summary.addEventListener('click', () => {
+      const node = cy.getElementById(parent);
+      clicked(node);
+    });
 
     const ul = document.createElement("ul");
-    for (const child of children) {
+    const sortedChildren = children.slice().sort((a, b) => a.localeCompare(b))
+    for (const child of sortedChildren) {
       const li = document.createElement("li");
       li.textContent = child;
+      li.addEventListener('click', () => {
+        const lists = document.querySelectorAll('li')
+        for (const list of lists) list.classList.remove('clicked')    
+        
+        const node = cy.getElementById(child);
+        clicked(node);
+
+        li.classList.add('clicked')
+      });
       ul.appendChild(li);
     }
 
@@ -29,15 +83,6 @@ function loadToggle(data) {
     menuContainer.appendChild(details);
   }
 }
-
-function fitGraph() {
-  cy.animate({
-    fit: {
-      eles: cy.elements(),
-      padding: 50
-    }
-  })
-};
 
 function loadGraph(elements) {
   if (cy) cy.destroy();
@@ -144,22 +189,7 @@ function loadGraph(elements) {
 
   cy.on('tap', 'node', (e) => {
     const node = e.target;
-
-    cy.elements().removeClass('highlighted tapped');
-    node.addClass('tapped');
-
-    // Highlight the node and all its dependencies
-    const bfs = cy.elements().breadthFirstSearch({
-      roots: node,
-      directed: true,
-      visit: (node, edge) => {
-        node.addClass('highlighted');
-        if (edge) edge.addClass('highlighted');
-      }
-    });
-      
-    const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
-    console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
+    clicked(node);
   });
 
   cy.on('mouseup', () => {
@@ -172,7 +202,7 @@ function loadGraph(elements) {
       bbox.y2 < viewportExtent.y1 || 
       bbox.y1 > viewportExtent.y2;  
 
-    if (isOutOfView) fitGraph();
+    if (isOutOfView) animate(cy.elements());
   });
 };
 
@@ -182,7 +212,7 @@ clearHighlightsBtn.addEventListener("click", () => {
 });
 
 const fitBtn = document.querySelector(".fit-btn");
-fitBtn.addEventListener("click", fitGraph);
+fitBtn.addEventListener("click", () => animate(cy.elements()));
 
 const input = document.querySelector('.search');
 let debounceTimeout;
@@ -204,15 +234,8 @@ input.addEventListener('input', () => {
 
     matches.addClass('highlighted');
 
-    if (matches.length > 0) {
-      cy.animate({
-        fit: {
-          eles: matches,
-          padding: 50
-        },
-        duration: 500
-      });
-    }
+    if (matches.length > 0) animate(matches);
+
   }, 300); // 300ms pause before triggering
 });
 
