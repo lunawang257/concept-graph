@@ -47,7 +47,7 @@ function handleClick(node) {
 }
 
 function loadToggle(data) {
-  const menuContainer = document.querySelector(".menu");
+  const menuContainer = document.querySelector(".menu-content");
 
   const sortedItems = Object.entries(data).sort((a, b) =>
     a[0].localeCompare(b[0])
