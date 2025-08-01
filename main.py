@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 FILE_NAME = 'test.json'
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
