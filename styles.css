@@ -100,6 +100,12 @@ details li {
 details li:hover {
     background-color: #ebebeb;
 }
+details li:active {
+    background-color: #cecece;
+}
+details li.clicked {
+    background-color: #e9e8e8;
+}
 details li:last-child {
     border-bottom: none;
 }
