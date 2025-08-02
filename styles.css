@@ -10,13 +10,30 @@
   }
 }
 
+body {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dcdcdc;
+  border-radius: 5px;
+}
+
 .container {
   /* border: 1px solid red; */
   display: flex;
-  height: 90vh;
-  width: 98%;
+  height: 95vh;
+  width: 99.5%;
   padding: 10px;
-  gap: 15px;
+  gap: 3px;
 }
 
 .menu {
@@ -30,6 +47,10 @@
 }
 
 .menu-content {
+  width: 93%;
+  padding: 0px;
+  margin: 0px;
+  padding-right: 4px;
   overflow-y: auto;
   overflow-x: hidden;
   overflow-wrap: break-word;
@@ -38,6 +59,7 @@
 .graph {
   /* border: 1px solid blue; */
   width: 75%;
+  position: relative;
 }
 
 #cy {
@@ -114,4 +136,37 @@ details li.clicked {
 }
 details li:last-child {
   border-bottom: none;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: #f4f4f4;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+
+.clear-highlights-btn,
+.fit-btn {
+  background-color: #b9ccfc;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0px;
+  color: black;
+}
+
+.fit-btn:hover,
+.clear-highlights-btn:hover {
+  background-color: #7b9ef6;
+}
+
+.fit-btn:active,
+.clear-highlights-btn:active {
+  background-color: #b9ccfc;
 }
