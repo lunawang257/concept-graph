@@ -19,6 +19,30 @@ function animateToFit(eles, duration = 300) {
   });
 }
 
+function openDetails(node) {
+  const node_name = node.id();
+  const node_parent = node.parent().id();
+
+  const clickedItem = document.querySelector("li.clicked");
+  if (clickedItem) clickedItem.classList.remove("clicked");
+
+  const summaries = document.querySelectorAll("summary");
+  const summary = Array.from(summaries).find(
+    (s) => s.textContent === node_parent
+  );
+  if (summary) {
+    const details = summary.parentElement;
+    details.open = true;
+    details.scrollIntoView({ behavior: "smooth" });
+
+    const ul = summary.nextElementSibling;
+    const li = Array.from(ul.children).find(
+      (li) => li.textContent === node_name
+    );
+    if (li) li.classList.add("clicked");
+  }
+}
+
 function handleClick(node) {
   cy.elements().removeClass("highlighted tapped");
   node.addClass("tapped");
@@ -37,6 +61,8 @@ function handleClick(node) {
       if (edge) edge.addClass("highlighted");
     },
   });
+
+  openDetails(node);
 
   const resultNodes = bfs.path.filter((ele) => ele.isNode());
   animateToFit(resultNodes);
