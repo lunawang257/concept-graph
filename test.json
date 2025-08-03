@@ -1,276 +1,426 @@
 {
-    "parentless nodes": [
+  "parentless nodes": [],
+  "groups": [
+    {
+      "parent": "Atoms",
+      "children": [
+        "Atomic Structure",
+        "Elements",
+        "Isotopes",
+        "Valence Electrons",
+        "Ions",
+        "Periodic Table",
+        "Electronegativity",
+        "Octet/Duet Rule",
+        "Atomic LDS",
+        "Average Atomic Mass",
+        "Isotopic Abundance",
+        "Atomic Misc (History, Size, etc.)",
+        "Bohr Model",
+        "Quantum Model",
+        "Quantum Numbers",
+        "Electron Configuration",
+        "Noble Gas Configuration",
+        "Orbital Diagram",
+        "Rules (Aufbau, Hund, Pauli)",
+        "Atomic Radius & Other Trends",
+        "Atomic Emission Spectrum",
+        "Energy Calculations",
+        "Isotopic Notation",
+        "Mass Spectrometry"
+      ]
+    },
+    {
+      "parent": "Molecules & Compounds",
+      "children": [
+        "Molecules & Compounds",
+        "Covalent Bonds",
+        "Ionic Bonds",
+        "Metallic Bonds",
+        "Molecular LDS",
+        "Polyatomic Ions",
+        "VSEPR and Molecular Geometry",
+        "Formal Charge",
+        "Resonance",
+        "Molecular Naming",
+        "Valence Bond Theory",
+        "Bond Hybridization",
+        "Molecular Naming",
+        "Counting Atoms"
+      ]
+    },
+    {
+      "parent": "Intermolecular Forces",
+      "children": [
+        "Polarity",
+        "Intermolecular Forces",
+        "Types of IMFs",
+        "IMF Trends",
+        "Crystalline Solids"
+      ]
+    },
+    {
+      "parent": "Solution",
+      "children": [
+        "Solution",
+        "Solubility & Saturation",
+        "Molarity",
+        "Molality",
+        "Dilution",
+        "Spectrophotometry",
+        "Beer's Law"
+      ]
+    },
+    {
+      "parent": "Chemical Rxns",
+      "children": [
+        "Types of Rxns",
+        "Solubility Rules",
+        "Activity Series",
+        "Rxn Predictions",
+        "Chemical Rxns",
+        "Chemical Equation",
+        "Balancing Equations"
+      ]
+    },
+    {
+      "parent": "Stoichiometry",
+      "children": [
+        "Mass-Particle",
+        "Mole Ratio",
+        "Molar Mass",
+        "Mole-Mass",
+        "Mole-Particle",
+        "Mole-Mole",
+        "Limiting Reactant",
+        "Excess Reactant",
+        "Theoretical, Actual, and Percent Yield",
+        "Avogadro's #"
+      ]
+    },
+    {
+      "parent": "Gas Laws",
+      "children": [
+        "Gas Stoichiometry",
+        "Gas Properties",
+        "Ideal Gas Law",
+        "Partial Pressure",
+        "Boyle's Law",
+        "Charles's Law",
+        "Gay-Lussac's Law"
+      ]
+    },
+    {
+      "parent": "Acids & Bases",
+      "children": [
+        "Acid-Base Rxn",
+        "Acids & Bases",
+        "Arrhenius",
+        "Naming Acids & Bases",
+        "pH & Indicators",
+        "[H+], [OH-], Kw, pOH, pKw",
+        "Ka, pKa",
+        "Strength",
+        "Bronsted-Lowry",
+        "Conjugate Pairs",
+        "Henderson-Hasselbalch",
+        "Titration"
+      ]
+    },
+    {
+      "parent": "Energy",
+      "children": [
+        "Enthalpy",
+        "Energy Diagram",
+        "Energy",
+        "Heat Stoichiometry",
+        "Enthalpy of Formation",
+        "Enthalpy of Reaction",
+        "Hess's Law",
+        "Entropy",
+        "Gibbs Free Energy",
+        "Calorimetry"
+      ]
+    },
+    {
+      "parent": "Kinetics",
+      "children": [
+        "Kinetics",
+        "Rate Law",
+        "Rate Constant",
+        "Rate Order",
+        "Reaction Mechanism"
+      ]
+    },
+    {
+      "parent": "Equilibrium",
+      "children": [
+        "Equilibrium",
+        "Le Chatelier's Principle",
+        "Equilibrium Constant",
+        "Kc",
+        "Kp",
         "K constant",
         "RICE Table"
-    ],
-    "groups": [
-        {"parent": "Atoms", "children": [
-            "Atomic Structure", 
-            "Elements", 
-            "Isotopes", 
-            "Valence Electrons", 
-            "Ions",
-            "Periodic Table",
-            "Electronegativity",
-            "Octet/Duet Rule",
-            "Atomic LDS",
-            "Average Atomic Mass", 
-            "Isotopic Abundance",
-            "Atomic Misc (History, Size, etc.)",
-            "Bohr Model",
-            "Quantum Model",
-            "Quantum Numbers",
-            "Electron Configuration",
-            "Noble Gas Configuration",
-            "Orbital Diagram",
-            "Rules (Aufbau, Hund, Pauli)",
-            "Atomic Radius & Other Trends",
-            "Atomic Emission Spectrum",
-            "Energy Calculations",
-            "Isotopic Notation",
-            "Mass Spectrometry"
-        ]},
-        {"parent": "Molecules & Compounds", "children": [
-            "Molecules & Compounds",
-            "Covalent Bonds",
-            "Ionic Bonds",
-            "Metallic Bonds",
-            "Molecular LDS",
-            "Polyatomic Ions",
-            "VSEPR and Molecular Geometry",
-            "Formal Charge",
-            "Resonance",
-            "Molecular Naming",
-            "Valence Bond Theory",
-            "Bond Hybridization",
-            "Molecular Naming",
-            "Counting Atoms"
-        ]},
-        {"parent": "Intermolecular Forces", "children": [
-            "Polarity",
-            "Intermolecular Forces",
-            "Types of IMFs",
-            "IMF Trends",
-            "Crystalline Solids"
-        ]},
-        {"parent": "Solution", "children": [
-            "Solution",
-            "Solubility & Saturation",
-            "Molarity",
-            "Molality",
-            "Dilution",
-            "Homo vs Hetero",
-            "Spectrophotometry",
-            "Beer's Law",
-            "Serparation Techniques"
-        ]},
-        {"parent": "Chemical Rxns", "children": [
-            "Types of Rxns",
-            "Solubility Rules",
-            "Activity Series",
-            "Rxn Predictions",
-            "Chemical Rxns",
-            "Chemical Equation",
-            "Balancing Equations"
-        ]},
-        {"parent": "Stoichiometry", "children": [
-            "Mass-Particle",
-            "Mole Ratio",
-            "Molar Mass",
-            "Mole-Mass",
-            "Mole-Particle",
-            "Mole-Mole",
-            "Limiting Reactant",
-            "Excess Reactant",
-            "Theoretical, Actual, and Percent Yield",
-            "Avogadro's #"
-        ]},
-        {"parent": "Gas Laws", "children": [
-            "Gas Stoichiometry",
-            "Gas Properties",
-            "Ideal Gas Law",
-            "Partial Pressure",
-            "Boyle's Law",
-            "Charles's Law",
-            "Gay-Lussac's Law"
-        ]},
-        {"parent": "Acids & Bases", "children": [
-            "Acid-Base Rxn",
-            "Acids & Bases",
-            "Arrhenius",
-            "Naming Acids & Bases",
-            "pH & Indicators",
-            "[H+], [OH-], Kw, pOH, pKw",
-            "Ka, pKa",
-            "Strength",
-            "Bronsted-Lowry",
-            "Conjugate Pairs",
-            "Henderson-Hasselbalch",
-            "Titration"
-        ]},
-        {"parent": "Energy", "children": [
-            "Enthalpy",
-            "Energy Diagram",
-            "Energy",
-            "Heat Stoichiometry",
-            "Enthalpy of Formation",
-            "Enthalpy of Reaction",
-            "Hess's Law",
-            "Entropy",
-            "Gibbs Free Energy",
-            "Calorimetry"
-        ]},
-        {"parent": "Kinetics", "children": [
-            "Kinetics",
-            "Rate Law",
-            "Rate Constant",
-            "Rate Order",
-            "Reaction Mechanism"
-        ]},
-        {"parent": "Equilibrium", "children": [
-            "Equilibrium",
-            "Le Chatelier's Principle",
-            "Equilibrium Constant",
-            "Kc",
-            "Kp"
-        ]},
-        {"parent": "Physical Properties", "children": [
-            "Density",
-            "Solids, Liquids, Gases",
-            "Phase Changes",
-            "Phase Diagrams",
-            "Colligative Properties",
-            "Colligative Calculations",
-            "Heating Curve",
-            "Percent Composition",
-            "Empirical Formula",
-            "Pure vs Mixture"
-        ]},
-        {"parent": "Math", "children": [
-            "Scientific Notation"
-        ]}
-    ],
-    "edges": [
-        {"concept": "Molecules & Compounds", "depends-on": ["Atomic Structure"]},
-        {"concept": "Elements", "depends-on": ["Atomic Structure"]}, 
-        {"concept": "Isotopes", "depends-on": ["Atomic Structure"]},
-        {"concept": "Isotopic Notation", "depends-on": ["Ions", "Isotopes"]},
-        {"concept": "Atomic Misc (History, Size, etc.)", "depends-on": ["Atomic Structure"]},
-        {"concept": "Valence Electrons", "depends-on": ["Atomic Structure", "Periodic Table"]},
-        {"concept": "Atomic LDS", "depends-on": ["Valence Electrons"]},
-        {"concept": "Octet/Duet Rule", "depends-on": ["Atomic LDS"]},
-        {"concept": "Electronegativity", "depends-on": ["Octet/Duet Rule"]},
-        {"concept": "VSEPR and Molecular Geometry", "depends-on": ["Molecular LDS"]},
-        {"concept": "Molecular LDS", "depends-on": ["Atomic LDS", "Covalent Bonds"]},
-        {"concept": "Formal Charge", "depends-on": ["Molecular LDS"]},
-        {"concept": "Resonance", "depends-on": ["Formal Charge"]},
+      ]
+    },
+    {
+      "parent": "Physical Properties",
+      "children": [
+        "Density",
+        "Solids, Liquids, Gases",
+        "Phase Changes",
+        "Phase Diagrams",
+        "Colligative Properties",
+        "Colligative Calculations",
+        "Heating Curve",
+        "Percent Composition",
+        "Empirical Formula",
+        "Pure vs Mixture",
+        "Homo vs Hetero",
+        "Separation Techniques"
+      ]
+    },
+    { "parent": "Math", "children": ["Scientific Notation"] }
+  ],
+  "edges": [
+    { "concept": "Molecules & Compounds", "depends-on": ["Atomic Structure"] },
+    { "concept": "Elements", "depends-on": ["Atomic Structure"] },
+    { "concept": "Isotopes", "depends-on": ["Atomic Structure"] },
+    { "concept": "Isotopic Notation", "depends-on": ["Ions", "Isotopes"] },
+    {
+      "concept": "Atomic Misc (History, Size, etc.)",
+      "depends-on": ["Atomic Structure"]
+    },
+    {
+      "concept": "Valence Electrons",
+      "depends-on": ["Atomic Structure", "Periodic Table"]
+    },
+    { "concept": "Atomic LDS", "depends-on": ["Valence Electrons"] },
+    { "concept": "Octet/Duet Rule", "depends-on": ["Atomic LDS"] },
+    { "concept": "Electronegativity", "depends-on": ["Octet/Duet Rule"] },
+    {
+      "concept": "VSEPR and Molecular Geometry",
+      "depends-on": ["Molecular LDS"]
+    },
+    {
+      "concept": "Molecular LDS",
+      "depends-on": ["Atomic LDS", "Covalent Bonds"]
+    },
+    { "concept": "Formal Charge", "depends-on": ["Molecular LDS"] },
+    { "concept": "Resonance", "depends-on": ["Formal Charge"] },
 
-        {"concept": "Ions", "depends-on": ["Atomic Structure"]},
-        {"concept": "Polyatomic Ions", "depends-on": ["Ionic Bonds"]},
+    { "concept": "Ions", "depends-on": ["Atomic Structure"] },
+    { "concept": "Polyatomic Ions", "depends-on": ["Ionic Bonds"] },
 
-        {"concept": "Covalent Bonds", "depends-on": ["Electronegativity", "Molecules & Compounds"]},
-        {"concept": "Ionic Bonds", "depends-on": ["Ions", "Molecules & Compounds"]},
-        {"concept": "Metallic Bonds", "depends-on": ["Ions", "Molecules & Compounds"]},
-        {"concept": "Periodic Table", "depends-on": ["Elements"]},
+    {
+      "concept": "Covalent Bonds",
+      "depends-on": ["Electronegativity", "Molecules & Compounds"]
+    },
+    {
+      "concept": "Ionic Bonds",
+      "depends-on": ["Ions", "Molecules & Compounds"]
+    },
+    {
+      "concept": "Metallic Bonds",
+      "depends-on": ["Ions", "Molecules & Compounds"]
+    },
+    { "concept": "Periodic Table", "depends-on": ["Elements"] },
 
-        {"concept": "Mass Spectrometry", "depends-on": ["Isotopes"]},
-        {"concept": "Isotopic Abundance", "depends-on": ["Mass Spectrometry"]},
-        {"concept": "Average Atomic Mass", "depends-on": ["Isotopic Abundance"]},
-        
-        {"concept": "Bohr Model", "depends-on": ["Atomic Structure"]},
-        {"concept": "Quantum Model", "depends-on": ["Bohr Model", "Periodic Table"]},
-        {"concept": "Electron Configuration", "depends-on": ["Quantum Model"]},
-        {"concept": "Orbital Diagram", "depends-on": ["Rules (Aufbau, Hund, Pauli)"]},
-        {"concept": "Rules (Aufbau, Hund, Pauli)", "depends-on": ["Quantum Numbers"]},
-        {"concept": "Quantum Numbers", "depends-on": ["Quantum Model"]},
-        {"concept": "Noble Gas Configuration", "depends-on": ["Electron Configuration"]},
-        {"concept": "Valence Bond Theory", "depends-on": ["Noble Gas Configuration", "VSEPR and Molecular Geometry"]},
-        {"concept": "Bond Hybridization", "depends-on": ["Valence Bond Theory", "Orbital Diagram"]},
+    { "concept": "Mass Spectrometry", "depends-on": ["Isotopes"] },
+    { "concept": "Isotopic Abundance", "depends-on": ["Mass Spectrometry"] },
+    { "concept": "Average Atomic Mass", "depends-on": ["Isotopic Abundance"] },
 
-        {"concept": "Atomic Radius & Other Trends", "depends-on": ["Bohr Model", "Periodic Table"]},
-        {"concept": "Atomic Emission Spectrum", "depends-on": ["Bohr Model"]},
-        {"concept": "Energy Calculations", "depends-on": ["Atomic Emission Spectrum"]},
+    { "concept": "Bohr Model", "depends-on": ["Atomic Structure"] },
+    {
+      "concept": "Quantum Model",
+      "depends-on": ["Bohr Model", "Periodic Table"]
+    },
+    { "concept": "Electron Configuration", "depends-on": ["Quantum Model"] },
+    {
+      "concept": "Orbital Diagram",
+      "depends-on": ["Rules (Aufbau, Hund, Pauli)"]
+    },
+    {
+      "concept": "Rules (Aufbau, Hund, Pauli)",
+      "depends-on": ["Quantum Numbers"]
+    },
+    { "concept": "Quantum Numbers", "depends-on": ["Quantum Model"] },
+    {
+      "concept": "Noble Gas Configuration",
+      "depends-on": ["Electron Configuration"]
+    },
+    {
+      "concept": "Valence Bond Theory",
+      "depends-on": ["Noble Gas Configuration", "VSEPR and Molecular Geometry"]
+    },
+    {
+      "concept": "Bond Hybridization",
+      "depends-on": ["Valence Bond Theory", "Orbital Diagram"]
+    },
 
-        {"concept": "Activity Series", "depends-on": ["Atomic Radius & Other Trends"]},
-        {"concept": "Rxn Predictions", "depends-on": ["Activity Series", "Types of Rxns", "Solubility Rules"]},
+    {
+      "concept": "Atomic Radius & Other Trends",
+      "depends-on": ["Bohr Model", "Periodic Table"]
+    },
+    { "concept": "Atomic Emission Spectrum", "depends-on": ["Bohr Model"] },
+    {
+      "concept": "Energy Calculations",
+      "depends-on": ["Atomic Emission Spectrum"]
+    },
 
-        {"concept": "Types of Rxns", "depends-on": ["Chemical Rxns"]},
-        {"concept": "Acid-Base Rxn", "depends-on": ["Chemical Rxns"]},
-        {"concept": "Molecular Naming", "depends-on": ["Covalent Bonds", "Polyatomic Ions", "Counting Atoms"]},
+    {
+      "concept": "Activity Series",
+      "depends-on": ["Atomic Radius & Other Trends"]
+    },
+    {
+      "concept": "Rxn Predictions",
+      "depends-on": ["Activity Series", "Types of Rxns", "Solubility Rules"]
+    },
 
-        {"concept": "Chemical Rxns", "depends-on": ["Ionic Bonds", "Covalent Bonds", "Metallic Bonds"]},
-        {"concept": "Crystalline Solids", "depends-on": ["Ionic Bonds", "IMF Trends", "Metallic Bonds"]},
-        
-        {"concept": "Solubility Rules", "depends-on": ["Polyatomic Ions"]},
-        {"concept": "Phase Changes", "depends-on": ["Solids, Liquids, Gases"]},
-        {"concept": "Phase Diagrams", "depends-on": ["Phase Changes"]},
-        {"concept": "Colligative Properties", "depends-on": ["Molality", "Phase Changes", "Pure vs Mixture"], "styles": ["dashed", "solid", "solid"]},
-        {"concept": "Colligative Calculations", "depends-on": ["Colligative Properties"]},
-        {"concept": "Heating Curve", "depends-on": ["Phase Diagrams", "Calorimetry"]},
+    { "concept": "Types of Rxns", "depends-on": ["Chemical Rxns"] },
+    { "concept": "Acid-Base Rxn", "depends-on": ["Chemical Rxns"] },
+    {
+      "concept": "Molecular Naming",
+      "depends-on": ["Covalent Bonds", "Polyatomic Ions", "Counting Atoms"]
+    },
 
-        {"concept": "Calorimetry", "depends-on": ["Enthalpy"]},
-        {"concept": "Enthalpy", "depends-on": ["Energy Diagram"]},
-        {"concept": "Energy Diagram", "depends-on": ["Energy"]},
-        {"concept": "Heat Stoichiometry", "depends-on": ["Mass-Particle", "Enthalpy"]},
-        {"concept": "Enthalpy of Formation", "depends-on": ["Enthalpy"]},
-        {"concept": "Enthalpy of Reaction", "depends-on": ["Enthalpy of Formation"]},
-        {"concept": "Hess's Law", "depends-on": ["Enthalpy of Reaction"]},
-        {"concept": "Entropy", "depends-on": ["Enthalpy of Reaction"]},
-        {"concept": "Gibbs Free Energy", "depends-on": ["Entropy", "Hess's Law"], "styles": ["solid", "dashed"]},
+    {
+      "concept": "Chemical Rxns",
+      "depends-on": ["Molecular Naming"]
+    },
+    {
+      "concept": "Crystalline Solids",
+      "depends-on": ["Molecular Naming", "IMF Trends"]
+    },
 
-        {"concept": "Polarity", "depends-on": ["Molecular LDS"]},
-        {"concept": "Intermolecular Forces", "depends-on": ["Polarity"]},
-        {"concept": "Types of IMFs", "depends-on": ["Intermolecular Forces"]},
-        {"concept": "IMF Trends", "depends-on": ["Types of IMFs"]},
+    { "concept": "Solubility Rules", "depends-on": ["Polyatomic Ions"] },
+    { "concept": "Phase Changes", "depends-on": ["Solids, Liquids, Gases"] },
+    { "concept": "Phase Diagrams", "depends-on": ["Phase Changes"] },
+    {
+      "concept": "Colligative Properties",
+      "depends-on": ["Molality", "Phase Changes", "Pure vs Mixture"],
+      "styles": ["dashed", "solid", "solid"]
+    },
+    {
+      "concept": "Colligative Calculations",
+      "depends-on": ["Colligative Properties"]
+    },
+    {
+      "concept": "Heating Curve",
+      "depends-on": ["Phase Diagrams", "Calorimetry"]
+    },
 
-        {"concept": "Solution", "depends-on": ["Homo vs Hetero"]},
-        {"concept": "Homo vs Hetero", "depends-on": ["Pure vs Mixture"]},
-        {"concept": "Solubility & Saturation", "depends-on": ["Solution"]},
-        {"concept": "Molarity", "depends-on": ["Solution", "Mole-Mass"]},
-        {"concept": "Molality", "depends-on": ["Mole-Mass", "Molarity"]},
-        {"concept": "Dilution", "depends-on": ["Molarity"]},
-        {"concept": "Spectrophotometry", "depends-on": ["Molarity"]},
-        {"concept": "Beer's Law", "depends-on": ["Spectrophotometry"]},
+    { "concept": "Calorimetry", "depends-on": ["Enthalpy"] },
+    { "concept": "Enthalpy", "depends-on": ["Energy Diagram"] },
+    { "concept": "Energy Diagram", "depends-on": ["Energy"] },
+    {
+      "concept": "Heat Stoichiometry",
+      "depends-on": ["Mass-Particle", "Enthalpy"]
+    },
+    { "concept": "Enthalpy of Formation", "depends-on": ["Enthalpy"] },
+    {
+      "concept": "Enthalpy of Reaction",
+      "depends-on": ["Enthalpy of Formation"]
+    },
+    { "concept": "Hess's Law", "depends-on": ["Enthalpy of Reaction"] },
+    { "concept": "Entropy", "depends-on": ["Enthalpy of Reaction"] },
+    {
+      "concept": "Gibbs Free Energy",
+      "depends-on": ["Entropy", "Hess's Law"],
+      "styles": ["solid", "dashed"]
+    },
 
-        {"concept": "Serparation Techniques", "depends-on": ["Pure vs Mixture", "Phase Changes", "Density", "Polarity"]},
+    { "concept": "Polarity", "depends-on": ["Molecular LDS"] },
+    { "concept": "Intermolecular Forces", "depends-on": ["Polarity"] },
+    { "concept": "Types of IMFs", "depends-on": ["Intermolecular Forces"] },
+    { "concept": "IMF Trends", "depends-on": ["Types of IMFs"] },
 
-        {"concept": "Counting Atoms", "depends-on": ["Molecules & Compounds"]},
-        {"concept": "Chemical Equation", "depends-on": ["Chemical Rxns"]},
-        {"concept": "Balancing Equations", "depends-on": ["Counting Atoms", "Chemical Equation"]},
-        {"concept": "Mole Ratio", "depends-on": ["Balancing Equations"]},
-        {"concept": "Molar Mass", "depends-on": ["Counting Atoms"]},
-        {"concept": "Mole-Mass", "depends-on": ["Molar Mass"]},
-        {"concept": "Mole-Particle", "depends-on": ["Avogadro's #"]},
-        {"concept": "Avogadro's #", "depends-on": ["Scientific Notation"]},
-        {"concept": "Mole-Mole", "depends-on": ["Mole Ratio"]},
-        {"concept": "Mass-Particle", "depends-on": ["Mole-Mass", "Mole-Particle", "Mole-Mole"]},
+    { "concept": "Solution", "depends-on": ["Homo vs Hetero"] },
+    { "concept": "Homo vs Hetero", "depends-on": ["Pure vs Mixture"] },
+    { "concept": "Solubility & Saturation", "depends-on": ["Solution"] },
+    { "concept": "Molarity", "depends-on": ["Solution", "Mole-Mass"] },
+    { "concept": "Molality", "depends-on": ["Molarity"] },
+    { "concept": "Dilution", "depends-on": ["Molarity"] },
+    { "concept": "Spectrophotometry", "depends-on": ["Molarity"] },
+    { "concept": "Beer's Law", "depends-on": ["Spectrophotometry"] },
 
-     
-        {"concept": "Limiting Reactant", "depends-on": ["Mass-Particle"]},
-        {"concept": "Theoretical, Actual, and Percent Yield", "depends-on": ["Limiting Reactant"]},
-        {"concept": "Excess Reactant", "depends-on": ["Theoretical, Actual, and Percent Yield"]},
+    {
+      "concept": "Separation Techniques",
+      "depends-on": ["Pure vs Mixture", "Phase Changes", "Density", "Polarity"]
+    },
 
-        {"concept": "Gas Stoichiometry", "depends-on": ["Gas Properties", "Mass-Particle"]},
-        {"concept": "Ideal Gas Law", "depends-on": ["Gas Properties"]},
-        {"concept": "Partial Pressure", "depends-on": ["Gas Properties"]},
-        {"concept": "Boyle's Law", "depends-on": ["Ideal Gas Law"]},
-        {"concept": "Charles's Law", "depends-on": ["Ideal Gas Law"]},
-        {"concept": "Gay-Lussac's Law", "depends-on": ["Ideal Gas Law"]},
+    { "concept": "Counting Atoms", "depends-on": ["Molecules & Compounds"] },
+    { "concept": "Chemical Equation", "depends-on": ["Chemical Rxns"] },
+    {
+      "concept": "Balancing Equations",
+      "depends-on": ["Counting Atoms", "Chemical Equation"]
+    },
+    {
+      "concept": "Mole Ratio",
+      "depends-on": ["Balancing Equations", "Avogadro's #"]
+    },
+    {
+      "concept": "Molar Mass",
+      "depends-on": ["Counting Atoms", "Avogadro's #"]
+    },
+    { "concept": "Mole-Mass", "depends-on": ["Molar Mass"] },
+    { "concept": "Mole-Particle", "depends-on": ["Avogadro's #"] },
+    { "concept": "Avogadro's #", "depends-on": ["Scientific Notation"] },
+    { "concept": "Mole-Mole", "depends-on": ["Mole Ratio"] },
+    {
+      "concept": "Mass-Particle",
+      "depends-on": ["Mole-Mass", "Mole-Particle", "Mole-Mole"]
+    },
 
-        {"concept": "Percent Composition", "depends-on": ["Mole-Mass", "Pure vs Mixture"]},
-        {"concept": "Empirical Formula", "depends-on": ["Percent Composition"]},
+    { "concept": "Limiting Reactant", "depends-on": ["Mass-Particle"] },
+    {
+      "concept": "Theoretical, Actual, and Percent Yield",
+      "depends-on": ["Limiting Reactant"]
+    },
+    {
+      "concept": "Excess Reactant",
+      "depends-on": ["Theoretical, Actual, and Percent Yield"]
+    },
 
-        {"concept": "Acid-Base Rxn", "depends-on": ["Acids & Bases"]},
-        {"concept": "Arrhenius", "depends-on": ["Acid-Base Rxn", "Polyatomic Ions"]},
-        {"concept": "Naming Acids & Bases", "depends-on": ["Arrhenius"]},
-        {"concept": "pH & Indicators", "depends-on": ["Acids & Bases"]},
-        {"concept": "[H+], [OH-], Kw, pOH, pKw", "depends-on": ["pH & Indicators", "K constant", "Arrhenius"]},
-        {"concept": "Titration", "depends-on": ["[H+], [OH-], Kw, pOH, pKw"]},
-        {"concept": "Ka, pKa", "depends-on": ["[H+], [OH-], Kw, pOH, pKw", "Conjugate Pairs"]},
-        {"concept": "Strength", "depends-on": ["Ka, pKa"]},
-        {"concept": "Bronsted-Lowry", "depends-on": ["Arrhenius"]},
-        {"concept": "Conjugate Pairs", "depends-on": ["Bronsted-Lowry"]},
-        {"concept": "Henderson-Hasselbalch", "depends-on": ["Ka, pKa"]}
+    {
+      "concept": "Gas Stoichiometry",
+      "depends-on": ["Gas Properties", "Mass-Particle"]
+    },
+    { "concept": "Ideal Gas Law", "depends-on": ["Gas Properties"] },
+    { "concept": "Partial Pressure", "depends-on": ["Gas Properties"] },
+    { "concept": "Boyle's Law", "depends-on": ["Ideal Gas Law"] },
+    { "concept": "Charles's Law", "depends-on": ["Ideal Gas Law"] },
+    { "concept": "Gay-Lussac's Law", "depends-on": ["Ideal Gas Law"] },
 
-    ]
+    {
+      "concept": "Percent Composition",
+      "depends-on": ["Mole-Mass", "Pure vs Mixture"]
+    },
+    { "concept": "Empirical Formula", "depends-on": ["Percent Composition"] },
+
+    { "concept": "Acid-Base Rxn", "depends-on": ["Acids & Bases"] },
+    {
+      "concept": "Arrhenius",
+      "depends-on": ["Acid-Base Rxn"]
+    },
+    { "concept": "Naming Acids & Bases", "depends-on": ["Arrhenius"] },
+    { "concept": "pH & Indicators", "depends-on": ["Acids & Bases"] },
+    {
+      "concept": "[H+], [OH-], Kw, pOH, pKw",
+      "depends-on": ["pH & Indicators", "K constant", "Arrhenius", "Molarity"]
+    },
+    {
+      "concept": "Titration",
+      "depends-on": ["[H+], [OH-], Kw, pOH, pKw"]
+    },
+    {
+      "concept": "Ka, pKa",
+      "depends-on": ["[H+], [OH-], Kw, pOH, pKw", "Conjugate Pairs"]
+    },
+    { "concept": "Strength", "depends-on": ["Ka, pKa"] },
+    { "concept": "Bronsted-Lowry", "depends-on": ["Arrhenius"] },
+    { "concept": "Conjugate Pairs", "depends-on": ["Bronsted-Lowry"] },
+    { "concept": "Henderson-Hasselbalch", "depends-on": ["Ka, pKa"] }
+  ]
 }

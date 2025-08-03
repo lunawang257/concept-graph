@@ -196,6 +196,7 @@ function loadGraph(elements) {
         style: {
           "line-color": "#497DFF",
           "target-arrow-color": "#497DFF",
+          width: 3,
         },
       },
       {
@@ -236,6 +237,18 @@ function loadGraph(elements) {
 
     if (isOutOfView) animateToFit(cy.elements());
   });
+
+  cy.on(
+    "mouseover",
+    "node, edge",
+    () => (cy.container().style.cursor = "pointer")
+  );
+
+  cy.on(
+    "mouseout",
+    "node, edge",
+    () => (cy.container().style.cursor = "default")
+  );
 }
 
 const clearHighlightsBtn = document.querySelector(".clear-highlights-btn");
