@@ -33,13 +33,15 @@ function openDetails(node) {
   if (summary) {
     const details = summary.parentElement;
     details.open = true;
-    details.scrollIntoView({ behavior: "smooth" });
 
     const ul = summary.nextElementSibling;
     const li = Array.from(ul.children).find(
       (li) => li.textContent === node_name
     );
-    if (li) li.classList.add("clicked");
+    if (li) {
+      li.classList.add("clicked");
+      li.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   }
 }
 
