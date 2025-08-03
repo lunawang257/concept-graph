@@ -89,13 +89,100 @@ def get_toggle_list(old_dict: dict) -> dict:
 
     return new_dict
 
+def has_cycles(edges: list[dict]) -> bool:
+    # Build adjacency list from edges
+    graph = {}
+    for edge in edges:
+        source = edge['concept']
+        targets = edge['depends-on']
+        
+        if source not in graph:
+            graph[source] = []
+        graph[source].extend(targets)
+    
+    # DFS to detect cycles
+    visited = set()
+    rec_stack = set()
+    
+    def dfs(node: str) -> bool:
+        visited.add(node)
+        rec_stack.add(node)
+        
+        # Check all neighbors
+        if node in graph:
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    if dfs(neighbor):
+                        return True
+                elif neighbor in rec_stack:
+                    # Back edge found - cycle detected
+                    print('Cycle found:', rec_stack)
+                    return True
+        
+        rec_stack.remove(node)
+        return False
+    
+    # Check for cycles starting from each unvisited node
+    for node in graph:
+        if node not in visited:
+            if dfs(node):
+                return True
+    
+    return False
+
+def has_parent_cycles(data: dict) -> bool:
+    # Build mapping from child to parent
+    child_to_parent = {}
+    
+    # Map all children to their parents
+    if 'groups' in data:
+        for group in data['groups']:
+            parent = group['parent'].upper()
+            for child in group['children']:
+                child_to_parent[child] = parent
+    
+    # Parentless nodes have no parent (empty string)
+    if 'parentless nodes' in data:
+        for node in data['parentless nodes']:
+            child_to_parent[node] = ''
+    
+    # Build parent-level graph
+    parent_graph = {}
+    
+    for edge in data['edges']:
+        source = edge['concept']
+        targets = edge['depends-on']
+        
+        source_parent = child_to_parent.get(source, '')
+        target_parents = [child_to_parent.get(target, '') for target in targets]
+        
+        # Add edges between parents
+        if source_parent not in parent_graph:
+            parent_graph[source_parent] = set()
+        
+        for target_parent in target_parents:
+            if target_parent != source_parent:  # Don't add self-loops
+                parent_graph[source_parent].add(target_parent)
+    
+    # Convert sets to lists for consistency with has_cycles
+    parent_edges = []
+    for source_parent, target_parents in parent_graph.items():
+        for target_parent in target_parents:
+            parent_edges.append({
+                'concept': source_parent,
+                'depends-on': [target_parent]
+            })
+    
+    # Use the existing has_cycles function to check for cycles in parent graph
+    return has_cycles(parent_edges)
+
 @app.get('/load-toggle')
 def load_toggle():
     try:
         with open(FILE_NAME, 'r') as file:
             data = json.load(file)
             new_dict: dict = get_toggle_list(data)
-            print(new_dict)
+            # print(new_dict)
         return new_dict
     except FileNotFoundError:
         return {'error': f'File {FILE_NAME} not found'}
@@ -109,6 +196,8 @@ def parse_nodes_json(use_pos: bool) -> dict:
     try:
         with open(FILE_NAME, 'r') as file:
             data = json.load(file)
+            print('HAS CYCLES:', has_cycles(data['edges']))
+            print('PARENTS HAVE CYCLES:', has_parent_cycles(data))
             new_dict: dict = turn_into_cyto(data, use_pos)
         return new_dict
     except FileNotFoundError:
@@ -122,8 +211,6 @@ def parse_nodes_json(use_pos: bool) -> dict:
 async def save_positions(request: Request):
     try:
         positions = await request.json()
-        # Here you can save the positions to a file or database
-        # For now, let's just print them
         with open('positions.json', 'w') as f:
             json.dump(positions, f, indent=2)
         return {"message": "Positions saved successfully", "positions": positions}
