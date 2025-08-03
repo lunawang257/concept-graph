@@ -31,7 +31,7 @@ function createDropdown(matches, searchTerm) {
       const node = cy.getElementById(li.textContent);
       handleClick(node);
       dropdown.remove();
-      input.value = "";
+      searchInput.value = "";
     });
     dropdown.appendChild(li);
   }
@@ -246,9 +246,9 @@ clearHighlightsBtn.addEventListener("click", () => {
 const fitBtn = document.querySelector(".fit-btn");
 fitBtn.addEventListener("click", () => animateToFit(cy.elements()));
 
-const input = document.querySelector(".search");
-input.addEventListener("input", () => {
-  const term = input.value.trim().toLowerCase();
+const searchInput = document.querySelector(".search");
+searchInput.addEventListener("input", () => {
+  const term = searchInput.value.trim().toLowerCase();
 
   // Clear previous highlights
   cy.elements().removeClass("highlighted tapped");
