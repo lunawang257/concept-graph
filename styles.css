@@ -79,6 +79,31 @@ body {
 .search:focus {
   outline: none;
 }
+.search-container {
+  position: relative;
+}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: -2px;
+  margin: 0px;
+  padding: 0px;
+  width: 95%;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom: 3px solid #ccc;
+  border-radius: 0px 0px 5px 5px;
+  z-index: 10;
+}
+.dropdown-item {
+  list-style: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eee;
+}
 
 details {
   margin-top: 10px;
@@ -125,14 +150,19 @@ details li {
   padding: 8px 8px;
   margin: 0px;
 }
-details li:hover {
-  background-color: #ebebeb;
+details li:hover,
+details li.clicked:hover,
+.dropdown-item:hover,
+mark {
+  background-color: #cfdcff;
 }
-details li:active {
-  background-color: #cecece;
+details li:active,
+details li.clicked:active,
+.dropdown-item:active {
+  background-color: #b2c6fe;
 }
 details li.clicked {
-  background-color: #e9e8e8;
+  background-color: #ebebeb;
 }
 details li:last-child {
   border-bottom: none;

@@ -9,6 +9,34 @@ fetch(API_BASE + "/load-toggle")
   .then((d) => d.json())
   .then(loadToggle);
 
+function createDropdown(matches, searchTerm) {
+  const searchContainer = document.querySelector(".search-container");
+  const existingDropdown = searchContainer.querySelector(".dropdown");
+  if (existingDropdown) existingDropdown.remove();
+
+  const dropdown = document.createElement("ul");
+  dropdown.classList.add("dropdown");
+  searchContainer.appendChild(dropdown);
+
+  for (const match of matches) {
+    const li = document.createElement("li");
+    li.classList.add("dropdown-item");
+
+    const id = match.data("id");
+    const regex = new RegExp(`(${searchTerm})`, "gi");
+    const highlighted = id.replace(regex, "<mark>$1</mark>");
+    li.innerHTML = highlighted;
+
+    li.addEventListener("click", () => {
+      const node = cy.getElementById(li.textContent);
+      handleClick(node);
+      dropdown.remove();
+      searchInput.value = "";
+    });
+    dropdown.appendChild(li);
+  }
+}
+
 function animateToFit(eles, duration = 300) {
   cy.animate({
     fit: {
@@ -246,28 +274,29 @@ clearHighlightsBtn.addEventListener("click", () => {
 const fitBtn = document.querySelector(".fit-btn");
 fitBtn.addEventListener("click", () => animateToFit(cy.elements()));
 
-const input = document.querySelector(".search");
-let debounceTimeout;
+const searchInput = document.querySelector(".search");
+searchInput.addEventListener("input", () => {
+  const term = searchInput.value.trim().toLowerCase();
 
-input.addEventListener("input", () => {
-  clearTimeout(debounceTimeout); // clear the previous timer
+  // Clear previous highlights
+  cy.elements().removeClass("highlighted tapped");
 
-  debounceTimeout = setTimeout(() => {
-    const term = input.value.trim().toLowerCase();
+  // Clear dropdown if no input
+  const dropdown = document.querySelector(".dropdown");
+  if (term.length === 0 && dropdown) {
+    dropdown.remove();
+    return;
+  }
 
-    // Clear previous highlights
-    cy.elements().removeClass("highlighted tapped");
+  const matches = cy
+    .nodes()
+    .filter((node) => node.data("id").toLowerCase().includes(term));
 
-    if (term.length === 0) return;
-
-    const matches = cy
-      .nodes()
-      .filter((node) => node.data("id").toLowerCase().includes(term));
-
-    matches.addClass("highlighted");
-
-    if (matches.length > 0) animateToFit(matches);
-  }, 300); // 300ms pause before triggering
+  if (matches.length > 0) {
+    createDropdown(matches, term);
+  } else {
+    if (dropdown) dropdown.remove();
+  }
 });
 
 const loadBtn = document.querySelector(".load");
@@ -293,4 +322,14 @@ posBtn.addEventListener("click", () => {
     },
     body: JSON.stringify(positions),
   });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (event) => {
+  const dropdown = document.querySelector(".dropdown");
+  const container = document.querySelector(".search-container");
+
+  if (dropdown && !container.contains(event.target)) {
+    dropdown.remove();
+  }
 });
