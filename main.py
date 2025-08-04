@@ -48,13 +48,6 @@ def turn_into_cyto(old_dict: dict, use_pos: bool) -> dict:
                 new_dict['nodes'].append(node)
 
                 nodes_and_parents[c] = parent
-    
-    if 'parentless nodes' in old_dict:
-        for n in old_dict['parentless nodes']:
-            node: dict = {'data': {'id': n}}
-            new_dict['nodes'].append(node)
-
-            nodes_and_parents[n] = ''
 
     # append edges to new_dict
     for e in old_dict['edges']:
@@ -83,9 +76,6 @@ def get_toggle_list(old_dict: dict) -> dict:
             children: list[str] = group['children']
 
             new_dict[parent] = children
-
-    if 'parentless nodes' in old_dict:
-        new_dict[''] = old_dict['parentless nodes']
 
     return new_dict
 
@@ -140,11 +130,6 @@ def has_parent_cycles(data: dict) -> bool:
             parent = group['parent'].upper()
             for child in group['children']:
                 child_to_parent[child] = parent
-    
-    # Parentless nodes have no parent (empty string)
-    if 'parentless nodes' in data:
-        for node in data['parentless nodes']:
-            child_to_parent[node] = ''
     
     # Build parent-level graph
     parent_graph = {}
