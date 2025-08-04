@@ -94,7 +94,7 @@
         "Mole-Mole",
         "Limiting Reactant",
         "Excess Reactant",
-        "Theoretical, Actual, and Percent Yield",
+        "Theoretical Yield",
         "Avogadro's #"
       ]
     },
@@ -375,12 +375,12 @@
 
     { "concept": "Limiting Reactant", "depends-on": ["Mass-Particle"] },
     {
-      "concept": "Theoretical, Actual, and Percent Yield",
+      "concept": "Theoretical Yield",
       "depends-on": ["Limiting Reactant"]
     },
     {
       "concept": "Excess Reactant",
-      "depends-on": ["Theoretical, Actual, and Percent Yield"]
+      "depends-on": ["Theoretical Yield"]
     },
 
     {
