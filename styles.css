@@ -85,6 +85,13 @@ body {
   padding: 5px 10px;
   border-bottom: 1px solid #eee;
 }
+.dropdown-item:hover,
+.dropdown-item mark {
+  background-color: #cfdcff;
+}
+.dropdown-item:active {
+  background-color: #b2c6fe;
+}
 
 .button-container {
   display: flex;

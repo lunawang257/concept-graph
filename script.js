@@ -5,6 +5,34 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
+function createDropdown(matches, searchTerm) {
+  const searchContainer = document.querySelector(".search-container");
+  const existingDropdown = searchContainer.querySelector(".dropdown");
+  if (existingDropdown) existingDropdown.remove();
+
+  const dropdown = document.createElement("ul");
+  dropdown.classList.add("dropdown");
+  searchContainer.appendChild(dropdown);
+
+  for (const match of matches) {
+    const li = document.createElement("li");
+    li.classList.add("dropdown-item");
+
+    const id = match.data("id");
+    const regex = new RegExp(`(${searchTerm})`, "gi");
+    const highlighted = id.replace(regex, "<mark>$1</mark>");
+    li.innerHTML = highlighted;
+
+    li.addEventListener("click", () => {
+      const node = cy.getElementById(li.textContent);
+      handleClick(node);
+      dropdown.remove();
+      searchInput.value = "";
+    });
+    dropdown.appendChild(li);
+  }
+}
+
 function animateToFit(eles, padding = 80, duration = 300) {
   cy.animate({
     fit: {
