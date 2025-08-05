@@ -5,72 +5,14 @@ fetch(API_BASE + "/nodes-json/true")
   .then((d) => d.json())
   .then(loadGraph);
 
-fetch(API_BASE + "/load-toggle")
-  .then((d) => d.json())
-  .then(loadToggle);
-
-function createDropdown(matches, searchTerm) {
-  const searchContainer = document.querySelector(".search-container");
-  const existingDropdown = searchContainer.querySelector(".dropdown");
-  if (existingDropdown) existingDropdown.remove();
-
-  const dropdown = document.createElement("ul");
-  dropdown.classList.add("dropdown");
-  searchContainer.appendChild(dropdown);
-
-  for (const match of matches) {
-    const li = document.createElement("li");
-    li.classList.add("dropdown-item");
-
-    const id = match.data("id");
-    const regex = new RegExp(`(${searchTerm})`, "gi");
-    const highlighted = id.replace(regex, "<mark>$1</mark>");
-    li.innerHTML = highlighted;
-
-    li.addEventListener("click", () => {
-      const node = cy.getElementById(li.textContent);
-      handleClick(node);
-      dropdown.remove();
-      searchInput.value = "";
-    });
-    dropdown.appendChild(li);
-  }
-}
-
-function animateToFit(eles, duration = 300) {
+function animateToFit(eles, padding = 80, duration = 300) {
   cy.animate({
     fit: {
       eles: eles,
-      padding: 30,
+      padding: padding,
     },
     duration: duration, // milliseconds
   });
-}
-
-function openDetails(node) {
-  const node_name = node.id();
-  const node_parent = node.parent().id();
-
-  const clickedItem = document.querySelector("li.clicked");
-  if (clickedItem) clickedItem.classList.remove("clicked");
-
-  const summaries = document.querySelectorAll("summary");
-  const summary = Array.from(summaries).find(
-    (s) => s.textContent === node_parent
-  );
-  if (summary) {
-    const details = summary.parentElement;
-    details.open = true;
-
-    const ul = summary.nextElementSibling;
-    const li = Array.from(ul.children).find(
-      (li) => li.textContent === node_name
-    );
-    if (li) {
-      li.classList.add("clicked");
-      li.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
 }
 
 function handleClick(node) {
@@ -78,12 +20,12 @@ function handleClick(node) {
   node.addClass("tapped");
 
   if (node.hasClass("parent")) {
-    animateToFit(node, 500);
+    animateToFit(node);
     return;
   }
 
   // Highlight the node and all its dependencies
-  const bfs = cy.elements().breadthFirstSearch({
+  cy.elements().breadthFirstSearch({
     roots: node,
     directed: true,
     visit: (node, edge) => {
@@ -92,54 +34,8 @@ function handleClick(node) {
     },
   });
 
-  openDetails(node);
-
-  const resultNodes = bfs.path.filter((ele) => ele.isNode());
-  animateToFit(resultNodes);
-
-  // List out all the topics user needs to learn in console
-  // const resultNodes = bfs.path.filter(ele => ele.isNode() && ele.id() !== node.id());
-  // console.log("To learn", node.id(), ", you need to first master:", resultNodes.map(n => n.id()));
-}
-
-function loadToggle(data) {
-  const menuContainer = document.querySelector(".menu-content");
-
-  const sortedItems = Object.entries(data).sort((a, b) =>
-    a[0].localeCompare(b[0])
-  );
-  for (const [parent, children] of sortedItems) {
-    const details = document.createElement("details");
-    details.setAttribute("name", "content");
-
-    const summary = document.createElement("summary");
-    summary.textContent = parent;
-    summary.addEventListener("click", () => {
-      const node = cy.getElementById(parent);
-      handleClick(node);
-    });
-
-    const ul = document.createElement("ul");
-    const sortedChildren = children.slice().sort((a, b) => a.localeCompare(b));
-    for (const child of sortedChildren) {
-      const li = document.createElement("li");
-      li.textContent = child;
-      li.addEventListener("click", () => {
-        const clickedItem = document.querySelector("li.clicked");
-        if (clickedItem) clickedItem.classList.remove("clicked");
-
-        const node = cy.getElementById(child);
-        handleClick(node);
-
-        li.classList.add("clicked");
-      });
-      ul.appendChild(li);
-    }
-
-    details.appendChild(summary);
-    details.appendChild(ul);
-    menuContainer.appendChild(details);
-  }
+  const node_parent = node.parent();
+  animateToFit(node_parent);
 }
 
 function loadGraph(elements) {
@@ -157,13 +53,13 @@ function loadGraph(elements) {
           shape: "roundrectangle",
           "background-color": "#F4F4F4",
           "border-color": "#F4F4F4",
-          "border-width": 2,
+          "border-width": 3,
           "text-valign": "center",
           "text-halign": "center",
           color: "black",
-          "font-size": 14,
+          "font-size": 16,
           width: (node) => {
-            return node.data("id").length * 7;
+            return node.data("id").length * 9;
           },
           padding: 10,
         },
@@ -246,6 +142,11 @@ function loadGraph(elements) {
     wheelSensitivity: 0.1,
     minZoom: 0.05,
     maxZoom: 1,
+  });
+
+  cy.ready(() => {
+    cy.getElementById("ATOMS").select();
+    cy.fit(cy.$(":selected"), 80);
   });
 
   cy.on("tap", "node", (e) => {
