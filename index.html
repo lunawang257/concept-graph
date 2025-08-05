@@ -6,26 +6,23 @@
     <title>Concept Graph</title>
     <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
     <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="copy_styles.css" />
   </head>
   <body>
     <div class="container">
-      <div class="menu">
+      <div class="graph">
         <div class="search-container">
           <input type="text" class="search" placeholder="Search..." />
         </div>
-        <div class="menu-content"></div>
-      </div>
+        <div class="button-container">
+          <button class="fit-btn">Fit All Concepts</button>
+          <button class="clear-highlights-btn">Clear Highlights</button>
+        </div>
 
-      <div class="graph">
         <div id="cy"></div>
         Ignore:
         <button class="load">Load JSON</button>
         <button class="position-btn">Save all positions</button>
-        <div class="button-container">
-          <button class="fit-btn">Reset Zoom</button>
-          <button class="clear-highlights-btn">Clear Highlights</button>
-        </div>
       </div>
     </div>
   </body>

@@ -127,6 +127,24 @@
       ]
     },
     {
+      "parent": "Physical Properties",
+      "children": [
+        "Density",
+        "Solids, Liquids, Gases",
+        "Phase Changes",
+        "Phase Diagrams",
+        "Colligative Properties",
+        "Colligative Calculations",
+        "Heating Curve",
+        "Heating Curve Calculations",
+        "Percent Composition",
+        "Empirical Formula",
+        "Pure vs Mixture",
+        "Homo vs Hetero",
+        "Separation Techniques"
+      ]
+    },
+    {
       "parent": "Energy",
       "children": [
         "Enthalpy",
@@ -161,23 +179,6 @@
         "Kp",
         "K constant",
         "RICE Table"
-      ]
-    },
-    {
-      "parent": "Physical Properties",
-      "children": [
-        "Density",
-        "Solids, Liquids, Gases",
-        "Phase Changes",
-        "Phase Diagrams",
-        "Colligative Properties",
-        "Colligative Calculations",
-        "Heating Curve",
-        "Percent Composition",
-        "Empirical Formula",
-        "Pure vs Mixture",
-        "Homo vs Hetero",
-        "Separation Techniques"
       ]
     },
     { "parent": "Math", "children": ["Scientific Notation"] }
@@ -307,9 +308,12 @@
     },
     {
       "concept": "Heating Curve",
-      "depends-on": ["Phase Diagrams", "Calorimetry"]
+      "depends-on": ["Phase Diagrams"]
     },
-
+    {
+      "concept": "Heating Curve Calculations",
+      "depends-on": ["Heating Curve", "Calorimetry"]
+    },
     { "concept": "Calorimetry", "depends-on": ["Enthalpy"] },
     { "concept": "Enthalpy", "depends-on": ["Energy Diagram"] },
     { "concept": "Energy Diagram", "depends-on": ["Energy"] },
